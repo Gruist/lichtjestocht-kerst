@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Lichtjestocht Noord-Beveland — Kerst 2026</title>
+  <style>
+    :root {
+      --gold: #f59e0b;
+      --gold-light: #fef08a;
+      --bg: #070d1e;
+      --card-bg: rgba(13, 27, 42, 0.94);
+      --border: rgba(245, 158, 11, 0.35);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #050914 0%, #0a1128 50%, #101c38 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px 50px 16px;
+    }
+    .container { width: 100%; max-width: 620px; }
+    .header { text-align: center; margin-bottom: 26px; }
+    .badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1 { font-size: 1.85rem; color: #ffffff; margin-bottom: 8px; }
+    .sub { color: var(--gold); font-size: 1.05rem; font-weight: 600; }
+    .hero-box {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-size: 0.98rem;
+    }
+    .villages-grid { display: flex; flex-direction: column; gap: 16px; }
+    .village-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .v-header { margin-bottom: 10px; }
+    .v-header h2 { font-size: 1.35rem; color: #ffffff; }
+    .v-church { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+    .v-desc { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 16px; }
+    .v-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .v-btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .v-btn.primary {
+      background: var(--gold);
+      color: #070d1e;
+      flex: 1;
+    }
+    .v-btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+    .poster-link-box {
+      margin-top: 30px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px dashed #38bdf8;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+    .poster-link-box a {
+      color: #38bdf8;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .footer { margin-top: 36px; text-align: center; font-size: 0.82rem; color: #94a3b8; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="badge">⭐ Kerst 2026</span>
+      <h1>QR Lichtjestocht Noord-Beveland</h1>
+      <p class="sub">Een sfeervolle kerstwandeling voor jong en oud</p>
+    </header>
+
+    <div class="hero-box">
+      <p>Welkom bij de gezamenlijke QR Lichtjestocht over Noord-Beveland! In vier dorpen — <strong>Kamperland, Colijnsplaat, Kortgene en Wissenkerke</strong> — is een sfeervolle tocht uitgezet voor het hele gezin. Volg het lichtspoor, zoek met de kinderen naar de 5 kerstfiguren en luister bij elke halte naar een stukje van het kerstverhaal.</p>
+    </div>
+
+    <div class="villages-grid">
+      
+        <div class="village-card">
+          <div class="v-header">
+            <h2>Kamperland</h2>
+            <span class="v-church">Kerk van Kamperland (Veerweg)</span>
+          </div>
+          <p class="v-desc">Startpunt: Bij de ingang van de Kerk, Veerweg. Loop langs de 5 kerstfiguren en luister naar het kerstverhaal.</p>
+          <div class="v-actions">
+            <a href="kamperland/stop1.html" class="v-btn primary">▶ Start bij Stop 1 (Kerk)</a>
+            <a href="kamperland/index.html" class="v-btn secondary">Alle 5 stops</a>
+          </div>
+        </div>
+        <div class="village-card">
+          <div class="v-header">
+            <h2>Colijnsplaat</h2>
+            <span class="v-church">Kerk van Colijnsplaat (Havelaarstraat)</span>
+          </div>
+          <p class="v-desc">Startpunt: Bij de Kerk, Havelaarstraat. Loop langs de 5 kerstfiguren en luister naar het kerstverhaal.</p>
+          <div class="v-actions">
+            <a href="colijnsplaat/stop1.html" class="v-btn primary">▶ Start bij Stop 1 (Kerk)</a>
+            <a href="colijnsplaat/index.html" class="v-btn secondary">Alle 5 stops</a>
+          </div>
+        </div>
+        <div class="village-card">
+          <div class="v-header">
+            <h2>Kortgene</h2>
+            <span class="v-church">Nicolaaskerk Kortgene (Kerkgang)</span>
+          </div>
+          <p class="v-desc">Startpunt: Bij de Nicolaaskerk, Kerkgang. Loop langs de 5 kerstfiguren en luister naar het kerstverhaal.</p>
+          <div class="v-actions">
+            <a href="kortgene/stop1.html" class="v-btn primary">▶ Start bij Stop 1 (Kerk)</a>
+            <a href="kortgene/index.html" class="v-btn secondary">Alle 5 stops</a>
+          </div>
+        </div>
+        <div class="village-card">
+          <div class="v-header">
+            <h2>Wissenkerke</h2>
+            <span class="v-church">Kerk van Wissenkerke (Kruisstraat)</span>
+          </div>
+          <p class="v-desc">Startpunt: Bij de Kerk, Kruisstraat. Loop langs de 5 kerstfiguren en luister naar het kerstverhaal.</p>
+          <div class="v-actions">
+            <a href="wissenkerke/stop1.html" class="v-btn primary">▶ Start bij Stop 1 (Kerk)</a>
+            <a href="wissenkerke/index.html" class="v-btn secondary">Alle 5 stops</a>
+          </div>
+        </div>
+    </div>
+
+    <div class="poster-link-box">
+      🖨️ <strong>Voor vrijwilligers & organisatie:</strong><br>
+      <a href="../posters/index.html">Bekijk & print hier de A3-posters met QR-codes voor alle dorpen →</a>
+    </div>
+
+    <footer class="footer">
+      <p>Gemaakt in samenwerking met de kerken op Noord-Beveland</p>
+    </footer>
+  </div>
+</body>
+</html>

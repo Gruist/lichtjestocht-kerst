@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Stop 1: De Stralende Kerstster — Kerst Lichtjestocht Kortgene</title>
+  <meta name="description" content="Stop 1 van de QR Lichtjestocht in Kortgene. Luister naar het kerstverhaal en vind het volgende kerstfiguur!">
+  <meta name="theme-color" content="#070d1e">
+  <style>
+    :root {
+      --bg-dark: #070d1e;
+      --bg-card: rgba(13, 27, 42, 0.92);
+      --gold-main: #f59e0b;
+      --gold-light: #fef08a;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --accent-blue: #38bdf8;
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-card: rgba(245, 158, 11, 0.35);
+      --green-finish: #10b981;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #050914 0%, #0a1128 40%, #101c38 100%);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 14px 40px 14px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Fonkelende sterretjes achtergrond */
+    .stars-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        radial-gradient(1px 1px at 25px 35px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 120px 80px, #fef08a, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 230px 45px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 310px 140px, #fef08a, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 80px 220px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 260px 290px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 170px 380px, #fde68a, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 350px 450px;
+      opacity: 0.7;
+    }
+    .container {
+      width: 100%;
+      max-width: 520px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* Top Header */
+    .top-header {
+      text-align: center;
+      padding: 6px 0 2px 0;
+    }
+    .sub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border-card);
+      color: var(--gold-light);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .main-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 6px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .village-badge {
+      color: var(--gold-main);
+    }
+    /* Voortgangsbalk */
+    .progress-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin: 4px 0 8px 0;
+      flex-wrap: wrap;
+    }
+    .pill {
+      padding: 5px 10px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .pill.active {
+      background: var(--gold-main);
+      color: #070d1e;
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+    .pill.visited {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+    .pill.upcoming {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+    /* De Hoofdkaart */
+    .card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 22px 18px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.12);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+    .status-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: var(--gold-main);
+      color: #070d1e;
+      margin-bottom: 12px;
+    }
+    .figure-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px auto 14px auto;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+      animation: floatSlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes floatSlow {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-6px); }
+    }
+    .figure-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .story-subtitle {
+      font-size: 0.95rem;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .kid-mission {
+      background: rgba(245, 158, 11, 0.12);
+      border-left: 4px solid var(--gold-main);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 14px;
+      text-align: left;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #fef3c7;
+    }
+    .welcome-text {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #e2e8f0;
+      text-align: left;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px;
+      border-radius: 14px;
+    }
+    /* Hero Audio Player */
+    .player-box {
+      background: linear-gradient(145deg, #132238, #0a1324);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 20px;
+      padding: 18px 14px;
+      margin: 18px 0;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .hero-play-btn {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+      color: #070d1e;
+      border: none;
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px var(--gold-glow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      touch-action: manipulation;
+    }
+    .hero-play-btn:active {
+      transform: scale(0.97);
+    }
+    .hero-play-btn.pulsing {
+      animation: pulseGold 2s infinite;
+    }
+    @keyframes pulseGold {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+    /* Actieve speler controls */
+    .player-controls {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .player-controls.visible {
+      display: flex;
+    }
+    /* Visualizer golf */
+    .visualizer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      height: 32px;
+      margin-bottom: 4px;
+    }
+    .v-bar {
+      width: 5px;
+      height: 8px;
+      background: var(--gold-main);
+      border-radius: 3px;
+      transition: height 0.1s ease;
+    }
+    .visualizer.playing .v-bar:nth-child(1) { animation: bounceBar 0.9s infinite alternate; }
+    .visualizer.playing .v-bar:nth-child(2) { animation: bounceBar 0.7s infinite alternate 0.2s; }
+    .visualizer.playing .v-bar:nth-child(3) { animation: bounceBar 1.1s infinite alternate 0.4s; }
+    .visualizer.playing .v-bar:nth-child(4) { animation: bounceBar 0.8s infinite alternate 0.1s; }
+    .visualizer.playing .v-bar:nth-child(5) { animation: bounceBar 1.0s infinite alternate 0.3s; }
+    @keyframes bounceBar {
+      0% { height: 6px; opacity: 0.5; }
+      100% { height: 28px; opacity: 1; }
+    }
+    /* Slider & Tijd */
+    .progress-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .seek-slider {
+      width: 100%;
+      height: 8px;
+      -webkit-appearance: none;
+      background: #1e293b;
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+    .seek-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gold-main);
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--gold-glow);
+    }
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    /* Knoppenbalk audio */
+    .buttons-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .secondary-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .mini-play-btn {
+      background: var(--gold-main);
+      color: #070d1e;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
+    /* Fallback native player (verborgen tenzij nodig) */
+    .native-audio-fallback {
+      margin-top: 10px;
+      width: 100%;
+      display: none;
+    }
+    /* Spoiler Hint Box */
+    .hint-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px dashed var(--accent-blue);
+      border-radius: 18px;
+      padding: 16px;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .hint-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .hint-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hint-toggle-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--accent-blue);
+      color: var(--accent-blue);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .hint-body {
+      display: none;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #f1f5f9;
+      animation: fadeIn 0.3s ease;
+    }
+    .hint-body.open {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hint-loc-title {
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    /* Volgende stop knop */
+    .next-stop-nav {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-btn {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .nav-btn.prev {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .nav-btn.next {
+      background: var(--gold-main);
+      color: #070d1e;
+      box-shadow: 0 4px 14px var(--gold-glow);
+    }
+    .nav-btn.finish {
+      background: var(--green-finish);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+    /* Footer */
+    .site-footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .site-footer a {
+      color: var(--gold-main);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="top-header">
+      <div class="sub-badge">⭐ Kerst Lichtjestocht 2026</div>
+      <h1 class="main-title">Dorp: <span class="village-badge">Kortgene</span></h1>
+      
+      <!-- Voortgangsbalk -->
+      <nav class="progress-nav" aria-label="Voortgang lichtjestocht">
+        <span class="pill active" title="Stop 1">⭐ Stop 1</span><span class="pill upcoming" title="Stop 2">2</span><span class="pill upcoming" title="Stop 3">3</span><span class="pill upcoming" title="Stop 4">4</span><span class="pill upcoming" title="Stop 5">5</span>
+      </nav>
+    </header>
+
+    <!-- Hoofdkaart -->
+    <main class="card">
+      <span class="status-badge">STARTPUNT BIJ DE KERK</span>
+      
+      <!-- Kerstfiguur Illustratie -->
+      <div class="figure-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="180" height="180">
+  <defs>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8db" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <!-- Gloed cirkel -->
+  <circle cx="150" cy="150" r="140" fill="url(#starGlow)"/>
+  <!-- Secundaire stralen -->
+  <g transform="rotate(45 150 150)" opacity="0.75">
+    <path d="M150 50 Q150 150 50 150 Q150 150 150 250 Q150 150 250 150 Q150 150 150 50 Z" fill="#fef3c7"/>
+  </g>
+  <!-- Hoofdster (grote Bethlehemster met verlengde onderstraal) -->
+  <path d="M150 20 Q150 150 60 150 Q150 150 150 280 Q150 150 240 150 Q150 150 150 20 Z" fill="url(#starGold)" stroke="#b45309" stroke-width="2"/>
+  <!-- Glans in kern -->
+  <circle cx="150" cy="150" r="24" fill="#ffffff" filter="drop-shadow(0 0 8px #fde047)"/>
+  <!-- Kleine fonkelsterretjes eromheen -->
+  <polygon points="60,60 63,70 73,73 63,76 60,86 57,76 47,73 57,70" fill="#fde68a"/>
+  <polygon points="240,70 242,77 249,79 242,81 240,88 238,81 231,79 238,77" fill="#fde68a"/>
+  <polygon points="50,220 52,226 58,228 52,230 50,236 48,230 42,228 48,226" fill="#fde68a"/>
+  <polygon points="240,210 243,218 251,220 243,222 240,230 237,222 229,220 237,218" fill="#fde68a"/>
+</svg>
+      </div>
+
+      <h2 class="figure-title">De Stralende Kerstster</h2>
+      <p class="story-subtitle">Deel 1: De Ster en de Boodschap • ⏱️ ca. 5 min</p>
+
+      <!-- Zoekopdracht voor kinderen -->
+      <div class="kid-mission">
+        <strong>👀 Speurders gezocht:</strong> Zoek de grote stralende kerstster!
+      </div>
+
+      <!-- Welkomstboodschap / verhaalinleiding -->
+      <div class="welcome-text">
+        Welkom bij de Kerst Lichtjestocht in Kortgene! De toren van de Nicolaaskerk wijst de weg. Wandel samen door de straten van Kortgene op zoek naar het kerstverhaal.
+      </div>
+
+      <!-- Hero Audio Player -->
+      <section class="player-box" aria-label="Audiospeler kerstverhaal">
+        <button id="heroPlayBtn" class="hero-play-btn pulsing" onclick="togglePlayAudio()">
+          <span id="heroPlayIcon">▶️</span>
+          <span id="heroPlayText">Luister naar het Kerstverhaal</span>
+        </button>
+
+        <!-- Uitgebreide Audio Bediening -->
+        <div id="playerControls" class="player-controls">
+          <!-- Geluidsgolf Visualizer -->
+          <div id="visualizer" class="visualizer">
+            <span class="v-bar"></span>
+            <span class="v-bar"></span>
+            <span class="v-bar"></span>
+            <span class="v-bar"></span>
+            <span class="v-bar"></span>
+          </div>
+
+          <!-- Scrub Slider & Tijd -->
+          <div class="progress-container">
+            <input type="range" id="seekSlider" class="seek-slider" min="0" max="100" value="0" step="0.5" oninput="onSeekChange(this.value)">
+            <div class="time-row">
+              <span id="currentTimeLabel">0:00</span>
+              <span id="durationLabel">ca. 5 min</span>
+            </div>
+          </div>
+
+          <!-- Knoppenbalk: -15s / Pauze / +15s -->
+          <div class="buttons-row">
+            <button class="secondary-btn" onclick="seekRelative(-15)" title="15 seconden terugspoelen">
+              ⏪ -15s
+            </button>
+            <button id="miniPlayBtn" class="mini-play-btn" onclick="togglePlayAudio()" title="Afspelen of pauzeren">
+              ❚❚
+            </button>
+            <button class="secondary-btn" onclick="seekRelative(15)" title="15 seconden vooruitspoelen">
+              +15s ⏩
+            </button>
+          </div>
+        </div>
+
+        <!-- HTML5 Audio Element -->
+        <audio id="audioEl" preload="auto">
+          <source src="../assets/audio/kortgene_kerstverhaal_deel_1.mp3" type="audio/mpeg">
+          <source src="../assets/audio/kerstverhaal_deel_1.mp3" type="audio/mpeg">
+          Je browser ondersteunt dit audioformaat helaas niet.
+        </audio>
+
+        <!-- Fallback controls als JavaScript niet werkt -->
+        <audio id="nativeAudioFallback" class="native-audio-fallback" controls>
+          <source src="../assets/audio/kortgene_kerstverhaal_deel_1.mp3" type="audio/mpeg">
+          <source src="../assets/audio/kerstverhaal_deel_1.mp3" type="audio/mpeg">
+        </audio>
+      </section>
+
+      <!-- Geheime Volgende Locatie Hint (Spoiler knop) -->
+      <section class="hint-card">
+        <div class="hint-header">
+          <div class="hint-title">
+            🧭 <span>Waar gaan we nu naartoe?</span>
+          </div>
+          <button id="hintToggleBtn" class="hint-toggle-btn" onclick="toggleHint()">
+            💡 Toon hint
+          </button>
+        </div>
+        <div id="hintBody" class="hint-body">
+          <p class="hint-loc-title">Op weg naar Stop 2: Het Schaapje 🐑</p>
+          <p>Loop vanaf de Kerkgang richting de Hoofdstraat / haven. Zoek naar het schaapje dat rust bij de lichtjes!</p>
+        </div>
+      </section>
+
+      <!-- Navigatie tussen stops -->
+      <nav class="next-stop-nav">
+        <a href="index.html" class="nav-btn prev">📋 Overzicht</a>
+        <a href="stop2.html" class="nav-btn next">Volgende: Stop 2 ▶</a>
+      </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Gemaakt in samenwerking met de kerken op Noord-Beveland</p>
+      <p style="margin-top: 6px;"><a href="../index.html">← Terug naar alle dorpen</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audioEl');
+    const heroBtn = document.getElementById('heroPlayBtn');
+    const heroIcon = document.getElementById('heroPlayIcon');
+    const heroText = document.getElementById('heroPlayText');
+    const controls = document.getElementById('playerControls');
+    const visualizer = document.getElementById('visualizer');
+    const miniBtn = document.getElementById('miniPlayBtn');
+    const seekSlider = document.getElementById('seekSlider');
+    const currentTimeLabel = document.getElementById('currentTimeLabel');
+    const durationLabel = document.getElementById('durationLabel');
+    const hintBody = document.getElementById('hintBody');
+    const hintBtn = document.getElementById('hintToggleBtn');
+
+    let isSeeking = false;
+
+    // Poging tot automatische afspeelstart zodra toegestaan door het OS
+    window.addEventListener('DOMContentLoaded', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Autoplay geslaagd!
+          onAudioStarted();
+        }).catch(() => {
+          // Autoplay geblokkeerd door iOS/Android (normaal gedrag): knop blijft pulseren
+          heroBtn.classList.add('pulsing');
+        });
+      }
+    });
+
+    // Toggle Afspelen / Pauzeren
+    function togglePlayAudio() {
+      if (audio.paused) {
+        audio.play().then(() => {
+          onAudioStarted();
+        }).catch(err => {
+          console.warn("Audio play blocked/failed:", err);
+          document.getElementById('nativeAudioFallback').style.display = 'block';
+        });
+      } else {
+        audio.pause();
+        onAudioPaused();
+      }
+    }
+
+    function onAudioStarted() {
+      heroBtn.classList.remove('pulsing');
+      controls.classList.add('visible');
+      visualizer.classList.add('playing');
+      heroIcon.textContent = '❚❚';
+      heroText.textContent = 'Pauzeer Kerstverhaal';
+      miniBtn.textContent = '❚❚';
+    }
+
+    function onAudioPaused() {
+      visualizer.classList.remove('playing');
+      heroIcon.textContent = '▶️';
+      heroText.textContent = 'Hervat Kerstverhaal';
+      miniBtn.textContent = '▶️';
+    }
+
+    // Tijd formatteren (mm:ss)
+    function formatTime(sec) {
+      if (isNaN(sec) || sec < 0) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    // Audio events
+    audio.addEventListener('timeupdate', () => {
+      if (!isSeeking && audio.duration) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        seekSlider.value = progress;
+        currentTimeLabel.textContent = formatTime(audio.currentTime);
+      }
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (audio.duration) {
+        durationLabel.textContent = formatTime(audio.duration);
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      onAudioPaused();
+      heroText.textContent = 'Opnieuw Luisteren';
+      // Open automatisch de hint na afloop van het verhaal!
+      openHint();
+    });
+
+    // Spoelen
+    function seekRelative(seconds) {
+      audio.currentTime = Math.max(0, Math.min(audio.currentTime + seconds, audio.duration || 9999));
+    }
+
+    function onSeekChange(value) {
+      if (audio.duration) {
+        audio.currentTime = (value / 100) * audio.duration;
+      }
+    }
+
+    // Hint toggle
+    function toggleHint() {
+      if (hintBody.classList.contains('open')) {
+        hintBody.classList.remove('open');
+        hintBtn.textContent = '💡 Toon hint';
+      } else {
+        openHint();
+      }
+    }
+
+    function openHint() {
+      hintBody.classList.add('open');
+      hintBtn.textContent = 'Verberg hint';
+    }
+  </script>
+</body>
+</html>

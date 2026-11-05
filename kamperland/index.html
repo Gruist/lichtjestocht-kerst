@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Lichtjestocht Kamperland — Protestantse Gemeenten Noord-Beveland</title>
+  <style>
+    :root {
+      --bg-dark: #070d1e;
+      --card-bg: rgba(13, 27, 42, 0.94);
+      --gold: #f59e0b;
+      --gold-light: #fef08a;
+      --text: #f8fafc;
+      --border: rgba(245, 158, 11, 0.35);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #050914 0%, #0a1128 50%, #101c38 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    .container { width: 100%; max-width: 540px; }
+    .header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1 { font-size: 1.6rem; color: #ffffff; margin-bottom: 6px; }
+    .sub { color: var(--gold); font-size: 1rem; font-weight: 600; }
+    .intro-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .stops-list { display: flex; flex-direction: column; gap: 12px; }
+    .stop-row-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .stop-row-link:hover, .stop-row-link:active {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.25);
+    }
+    .stop-mini-svg { width: 56px; height: 56px; flex-shrink: 0; }
+    .stop-info { flex: 1; }
+    .stop-label { font-size: 0.75rem; font-weight: 800; color: var(--gold); text-transform: uppercase; }
+    .stop-name { font-size: 1.05rem; font-weight: 700; margin: 2px 0; color: #ffffff; }
+    .stop-loc { font-size: 0.8rem; color: #94a3b8; }
+    .stop-arrow { color: var(--gold); font-size: 1.2rem; font-weight: 800; }
+    .footer { margin-top: 30px; text-align: center; font-size: 0.8rem; color: #94a3b8; }
+    .footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span class="badge">⭐ Kerst Lichtjestocht</span>
+      <h1>Dorp: Kamperland</h1>
+      <p class="sub">Protestantse Gemeente Kamperland</p>
+    </div>
+
+    <div class="intro-card">
+      <p>Welkom bij de Lichtjestocht in <strong>Kamperland</strong>! We starten bij de kerk en lopen langs 5 sfeervol verlichte kerstfiguren door het dorp. Scan onderweg de QR-codes of kies hieronder direct de stop waar je nu bent:</p>
+    </div>
+
+    <div class="stops-list">
+      
+        <a href="stop1.html" class="stop-row-link">
+          <div class="stop-mini-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="64" height="64">
+  <defs>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8db" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <!-- Gloed cirkel -->
+  <circle cx="150" cy="150" r="140" fill="url(#starGlow)"/>
+  <!-- Secundaire stralen -->
+  <g transform="rotate(45 150 150)" opacity="0.75">
+    <path d="M150 50 Q150 150 50 150 Q150 150 150 250 Q150 150 250 150 Q150 150 150 50 Z" fill="#fef3c7"/>
+  </g>
+  <!-- Hoofdster (grote Bethlehemster met verlengde onderstraal) -->
+  <path d="M150 20 Q150 150 60 150 Q150 150 150 280 Q150 150 240 150 Q150 150 150 20 Z" fill="url(#starGold)" stroke="#b45309" stroke-width="2"/>
+  <!-- Glans in kern -->
+  <circle cx="150" cy="150" r="24" fill="#ffffff" filter="drop-shadow(0 0 8px #fde047)"/>
+  <!-- Kleine fonkelsterretjes eromheen -->
+  <polygon points="60,60 63,70 73,73 63,76 60,86 57,76 47,73 57,70" fill="#fde68a"/>
+  <polygon points="240,70 242,77 249,79 242,81 240,88 238,81 231,79 238,77" fill="#fde68a"/>
+  <polygon points="50,220 52,226 58,228 52,230 50,236 48,230 42,228 48,226" fill="#fde68a"/>
+  <polygon points="240,210 243,218 251,220 243,222 240,230 237,222 229,220 237,218" fill="#fde68a"/>
+</svg></div>
+          <div class="stop-info">
+            <div class="stop-label">Stop 1 van 5</div>
+            <div class="stop-name">De Stralende Kerstster</div>
+            <div class="stop-loc">Kerk van Kamperland (Startpunt)</div>
+          </div>
+          <div class="stop-arrow">▶</div>
+        </a>
+        <a href="stop2.html" class="stop-row-link">
+          <div class="stop-mini-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="64" height="64">
+  <defs>
+    <radialGradient id="sheepGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ecfdf5" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#10b981" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="grassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <!-- Achtergrondgloed & heuveltje -->
+  <circle cx="150" cy="150" r="140" fill="url(#sheepGlow)"/>
+  <path d="M20 240 Q150 200 280 240 L280 280 L20 280 Z" fill="url(#grassGrad)"/>
+  <!-- Herdersstaf -->
+  <path d="M230 250 L230 110 C230 85 200 85 200 110" fill="none" stroke="#b45309" stroke-width="7" stroke-linecap="round"/>
+  <!-- Pootjes van het schaapje -->
+  <rect x="105" y="195" width="12" height="40" rx="6" fill="#475569"/>
+  <rect x="125" y="195" width="12" height="40" rx="6" fill="#334155"/>
+  <rect x="165" y="195" width="12" height="40" rx="6" fill="#475569"/>
+  <rect x="185" y="195" width="12" height="40" rx="6" fill="#334155"/>
+  <!-- Wolk-lichaam (wollige bollen) -->
+  <g fill="#f8fafc" stroke="#cbd5e1" stroke-width="3">
+    <circle cx="110" cy="170" r="28"/>
+    <circle cx="140" cy="180" r="30"/>
+    <circle cx="170" cy="180" r="30"/>
+    <circle cx="195" cy="165" r="28"/>
+    <circle cx="180" cy="135" r="28"/>
+    <circle cx="150" cy="125" r="30"/>
+    <circle cx="120" cy="135" r="28"/>
+    <!-- Midden invulling -->
+    <circle cx="150" cy="155" r="34" stroke="none"/>
+  </g>
+  <!-- Lief kopje -->
+  <ellipse cx="95" cy="140" rx="22" ry="26" fill="#fed7aa" stroke="#fb923c" stroke-width="2"/>
+  <!-- Oortjes -->
+  <ellipse cx="72" cy="130" rx="14" ry="7" transform="rotate(-20 72 130)" fill="#fbcfe8" stroke="#f472b6" stroke-width="2"/>
+  <ellipse cx="118" cy="130" rx="14" ry="7" transform="rotate(20 118 130)" fill="#fbcfe8" stroke="#f472b6" stroke-width="2"/>
+  <!-- Wolletje op het voorhoofd -->
+  <circle cx="95" cy="118" r="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="86" cy="120" r="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="104" cy="120" r="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <!-- Oogjes & neusje -->
+  <circle cx="87" cy="138" r="3.5" fill="#1e293b"/>
+  <circle cx="103" cy="138" r="3.5" fill="#1e293b"/>
+  <path d="M92 148 Q95 152 98 148" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+  <!-- Belletje met lintje om de nek -->
+  <path d="M108 160 Q118 168 128 162" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="118" cy="167" r="6" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+</svg></div>
+          <div class="stop-info">
+            <div class="stop-label">Stop 2 van 5</div>
+            <div class="stop-name">Het Schaapje & de Herder</div>
+            <div class="stop-loc">Locatie 2: Het Schaapje in Kamperland</div>
+          </div>
+          <div class="stop-arrow">▶</div>
+        </a>
+        <a href="stop3.html" class="stop-row-link">
+          <div class="stop-mini-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="64" height="64">
+  <defs>
+    <radialGradient id="camelGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#f59e0b" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="duneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <!-- Gloed & Zandduinen -->
+  <circle cx="150" cy="150" r="140" fill="url(#camelGlow)"/>
+  <path d="M10 250 Q90 220 180 240 Q240 255 290 240 L290 280 L10 280 Z" fill="url(#duneGrad)"/>
+  <!-- Grote gidsster aan de hemel -->
+  <polygon points="55,45 59,57 71,59 61,65 63,77 53,69 43,76 47,64 38,57 50,56" fill="#fde047" stroke="#b45309" stroke-width="1.5"/>
+  <!-- Benen van de kameel -->
+  <g fill="#d97706">
+    <rect x="100" y="190" width="10" height="55" rx="5"/>
+    <rect x="120" y="190" width="10" height="55" rx="5"/>
+    <rect x="180" y="190" width="10" height="55" rx="5"/>
+    <rect x="200" y="190" width="10" height="55" rx="5"/>
+  </g>
+  <!-- Lichaam & Bult -->
+  <path d="M90 190 Q90 155 120 155 Q135 155 145 130 Q160 115 175 130 Q185 155 215 155 Q225 175 220 195 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2.5"/>
+  <!-- Nek en Kop -->
+  <path d="M95 180 Q80 150 85 105 Q85 85 65 90 Q50 95 60 115 Q72 135 78 180 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2.5"/>
+  <!-- Oortje & Snuit -->
+  <ellipse cx="80" cy="90" rx="5" ry="9" fill="#d97706"/>
+  <circle cx="68" cy="98" r="3" fill="#1e293b"/>
+  <!-- Koninklijk zadeldekje met kwastjes (Oosterse wijzen) -->
+  <path d="M135 145 L185 145 L180 180 L140 180 Z" fill="#9333ea" stroke="#fbbf24" stroke-width="2"/>
+  <path d="M140 155 L175 155" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3,3"/>
+  <!-- Gouden kwastjes -->
+  <circle cx="145" cy="184" r="3" fill="#fbbf24"/>
+  <circle cx="160" cy="184" r="3" fill="#fbbf24"/>
+  <circle cx="175" cy="184" r="3" fill="#fbbf24"/>
+  <!-- Gouden teugels -->
+  <path d="M65 102 Q105 120 135 150" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <!-- Schatkistje op de rug -->
+  <rect x="150" y="130" width="22" height="15" rx="2" fill="#eab308" stroke="#78350f" stroke-width="1.5"/>
+  <line x1="150" y1="137" x2="172" y2="137" stroke="#78350f" stroke-width="1.5"/>
+</svg></div>
+          <div class="stop-info">
+            <div class="stop-label">Stop 3 van 5</div>
+            <div class="stop-name">De Wijze & de Kameel</div>
+            <div class="stop-loc">Locatie 3: De Wijze & de Kameel in Kamperland</div>
+          </div>
+          <div class="stop-arrow">▶</div>
+        </a>
+        <a href="stop4.html" class="stop-row-link">
+          <div class="stop-mini-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="64" height="64">
+  <defs>
+    <radialGradient id="donkeyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#94a3b8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#94a3b8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78716c"/>
+      <stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+  </defs>
+  <!-- Achtergrondgloed & Steenwegje naar Bethlehem -->
+  <circle cx="150" cy="150" r="140" fill="url(#donkeyGlow)"/>
+  <path d="M15 245 Q120 225 285 245 L285 280 L15 280 Z" fill="url(#pathGrad)"/>
+  <ellipse cx="60" cy="255" rx="14" ry="6" fill="#a8a29e"/>
+  <ellipse cx="120" cy="245" rx="16" ry="7" fill="#a8a29e"/>
+  <ellipse cx="190" cy="252" rx="18" ry="7" fill="#a8a29e"/>
+  <ellipse cx="250" cy="248" rx="15" ry="6" fill="#a8a29e"/>
+  <!-- Staartje met pluim -->
+  <path d="M210 180 Q235 195 230 220" fill="none" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="230" cy="222" r="5" fill="#334155"/>
+  <!-- Pootjes van de ezel -->
+  <g fill="#475569">
+    <rect x="110" y="195" width="11" height="48" rx="5"/>
+    <rect x="130" y="195" width="11" height="48" rx="5"/>
+    <rect x="175" y="195" width="11" height="48" rx="5"/>
+    <rect x="195" y="195" width="11" height="48" rx="5"/>
+    <!-- Hoefjes -->
+    <rect x="110" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="130" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="175" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="195" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+  </g>
+  <!-- Lichaam van het ezeltje -->
+  <ellipse cx="160" cy="180" rx="48" ry="32" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <!-- Zadel / deken voor Maria -->
+  <path d="M140 155 Q160 162 180 155 L180 185 Q160 190 140 185 Z" fill="#2563eb" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Nek en Hoofd -->
+  <path d="M130 180 L105 130 L80 145 L115 195 Z" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="88" cy="135" rx="24" ry="18" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <!-- Witte snuit -->
+  <ellipse cx="72" cy="140" rx="12" ry="11" fill="#f1f5f9"/>
+  <circle cx="68" cy="138" r="2.5" fill="#334155"/>
+  <circle cx="86" cy="130" r="3.5" fill="#0f172a"/>
+  <!-- Lange karakteristieke oren -->
+  <ellipse cx="98" cy="98" rx="7" ry="24" transform="rotate(-15 98 98)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="98" cy="98" rx="4" ry="18" transform="rotate(-15 98 98)" fill="#fbcfe8"/>
+  <ellipse cx="112" cy="102" rx="7" ry="24" transform="rotate(10 112 102)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="112" cy="102" rx="4" ry="18" transform="rotate(10 112 102)" fill="#fbcfe8"/>
+  <!-- Sfeervolle reis-lantaarn aan het tuig -->
+  <line x1="125" y1="165" x2="125" y2="185" stroke="#b45309" stroke-width="2"/>
+  <rect x="119" y="185" width="12" height="16" rx="2" fill="#fef08a" stroke="#78350f" stroke-width="1.5"/>
+  <circle cx="125" cy="193" r="3" fill="#ea580c"/>
+</svg></div>
+          <div class="stop-info">
+            <div class="stop-label">Stop 4 van 5</div>
+            <div class="stop-name">Het Dappere Ezeltje</div>
+            <div class="stop-loc">Locatie 4: Het Dappere Ezeltje in Kamperland</div>
+          </div>
+          <div class="stop-arrow">▶</div>
+        </a>
+        <a href="stop5.html" class="stop-row-link">
+          <div class="stop-mini-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="64" height="64">
+  <defs>
+    <radialGradient id="mangerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#fef08a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="roofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+  </defs>
+  <!-- Warme gloed uit de stal -->
+  <circle cx="150" cy="165" r="130" fill="url(#mangerGlow)"/>
+  <!-- Stal dak (balken) -->
+  <path d="M40 135 L150 65 L260 135 L245 145 L150 85 L55 145 Z" fill="url(#roofGrad)"/>
+  <line x1="60" y1="140" x2="60" y2="260" stroke="#78350f" stroke-width="8" stroke-linecap="round"/>
+  <line x1="240" y1="140" x2="240" y2="260" stroke="#78350f" stroke-width="8" stroke-linecap="round"/>
+  <!-- Bethlehemster pal boven de nok -->
+  <polygon points="150,30 154,48 168,52 155,58 158,74 148,63 138,72 143,57 131,50 146,47" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+  <circle cx="150" cy="53" r="6" fill="#ffffff"/>
+  <!-- Houten kribbe poten (kruislings) -->
+  <line x1="105" y1="190" x2="135" y2="255" stroke="#92400e" stroke-width="6" stroke-linecap="round"/>
+  <line x1="135" y1="190" x2="105" y2="255" stroke="#78350f" stroke-width="6" stroke-linecap="round"/>
+  <line x1="165" y1="190" x2="195" y2="255" stroke="#92400e" stroke-width="6" stroke-linecap="round"/>
+  <line x1="195" y1="190" x2="165" y2="255" stroke="#78350f" stroke-width="6" stroke-linecap="round"/>
+  <!-- Kribbe bak met stro -->
+  <polygon points="90,185 210,185 195,225 105,225" fill="#b45309" stroke="#78350f" stroke-width="3"/>
+  <!-- Gouden stro sprietjes die eruit piepen -->
+  <path d="M85 185 L100 170 M95 185 L115 168 M110 185 L125 172 M175 185 L190 170 M185 185 L205 172 M195 185 L215 175" stroke="#fcd34d" stroke-width="3" stroke-linecap="round"/>
+  <!-- Het Kindje Jezus in doeken gewikkeld -->
+  <ellipse cx="150" cy="180" rx="36" ry="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <!-- Gouden aureool / halo -->
+  <circle cx="132" cy="172" r="16" fill="#fef08a" stroke="#f59e0b" stroke-width="1.5" opacity="0.85"/>
+  <!-- Baby hoofdje -->
+  <circle cx="132" cy="172" r="11" fill="#fed7aa"/>
+  <!-- Slapend gezichtje -->
+  <path d="M127 172 Q130 175 133 172" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Wikkeldoek bandjes -->
+  <line x1="145" y1="172" x2="155" y2="188" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="158" y1="172" x2="168" y2="188" stroke="#cbd5e1" stroke-width="2"/>
+</svg></div>
+          <div class="stop-info">
+            <div class="stop-label">Stop 5 van 5</div>
+            <div class="stop-name">Het Kindje in de Kribbe</div>
+            <div class="stop-loc">Locatie 5: De Kribbe & de Stal (Eindpunt Kamperland)</div>
+          </div>
+          <div class="stop-arrow">▶</div>
+        </a>
+    </div>
+
+    <div class="footer">
+      <p><a href="../index.html">← Terug naar alle dorpen</a></p>
+      <p style="margin-top: 8px;">Gemaakt in samenwerking met de kerken op Noord-Beveland</p>
+    </div>
+  </div>
+</body>
+</html>
