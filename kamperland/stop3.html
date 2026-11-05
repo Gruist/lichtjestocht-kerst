@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Stop 3: De Wijze & de Kameel — Kerst Lichtjestocht Kamperland</title>
+  <title>Stop 3: Het Kindje in de Kribbe — Kerst Lichtjestocht Kamperland</title>
   <meta name="description" content="Stop 3 van de QR Lichtjestocht in Kamperland. Luister naar het kerstverhaal en vind het volgende kerstfiguur!">
   <meta name="theme-color" content="#070d1e">
   <style>
@@ -464,61 +464,59 @@
       <div class="figure-wrapper">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="180" height="180">
   <defs>
-    <radialGradient id="camelGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.9"/>
-      <stop offset="60%" stop-color="#f59e0b" stop-opacity="0.25"/>
+    <radialGradient id="mangerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#fef08a" stop-opacity="0.5"/>
       <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="duneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fcd34d"/>
-      <stop offset="100%" stop-color="#d97706"/>
+    <linearGradient id="roofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#451a03"/>
     </linearGradient>
   </defs>
-  <!-- Gloed & Zandduinen -->
-  <circle cx="150" cy="150" r="140" fill="url(#camelGlow)"/>
-  <path d="M10 250 Q90 220 180 240 Q240 255 290 240 L290 280 L10 280 Z" fill="url(#duneGrad)"/>
-  <!-- Grote gidsster aan de hemel -->
-  <polygon points="55,45 59,57 71,59 61,65 63,77 53,69 43,76 47,64 38,57 50,56" fill="#fde047" stroke="#b45309" stroke-width="1.5"/>
-  <!-- Benen van de kameel -->
-  <g fill="#d97706">
-    <rect x="100" y="190" width="10" height="55" rx="5"/>
-    <rect x="120" y="190" width="10" height="55" rx="5"/>
-    <rect x="180" y="190" width="10" height="55" rx="5"/>
-    <rect x="200" y="190" width="10" height="55" rx="5"/>
-  </g>
-  <!-- Lichaam & Bult -->
-  <path d="M90 190 Q90 155 120 155 Q135 155 145 130 Q160 115 175 130 Q185 155 215 155 Q225 175 220 195 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2.5"/>
-  <!-- Nek en Kop -->
-  <path d="M95 180 Q80 150 85 105 Q85 85 65 90 Q50 95 60 115 Q72 135 78 180 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2.5"/>
-  <!-- Oortje & Snuit -->
-  <ellipse cx="80" cy="90" rx="5" ry="9" fill="#d97706"/>
-  <circle cx="68" cy="98" r="3" fill="#1e293b"/>
-  <!-- Koninklijk zadeldekje met kwastjes (Oosterse wijzen) -->
-  <path d="M135 145 L185 145 L180 180 L140 180 Z" fill="#9333ea" stroke="#fbbf24" stroke-width="2"/>
-  <path d="M140 155 L175 155" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3,3"/>
-  <!-- Gouden kwastjes -->
-  <circle cx="145" cy="184" r="3" fill="#fbbf24"/>
-  <circle cx="160" cy="184" r="3" fill="#fbbf24"/>
-  <circle cx="175" cy="184" r="3" fill="#fbbf24"/>
-  <!-- Gouden teugels -->
-  <path d="M65 102 Q105 120 135 150" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-  <!-- Schatkistje op de rug -->
-  <rect x="150" y="130" width="22" height="15" rx="2" fill="#eab308" stroke="#78350f" stroke-width="1.5"/>
-  <line x1="150" y1="137" x2="172" y2="137" stroke="#78350f" stroke-width="1.5"/>
+  <!-- Warme gloed uit de stal -->
+  <circle cx="150" cy="165" r="130" fill="url(#mangerGlow)"/>
+  <!-- Stal dak (balken) -->
+  <path d="M40 135 L150 65 L260 135 L245 145 L150 85 L55 145 Z" fill="url(#roofGrad)"/>
+  <line x1="60" y1="140" x2="60" y2="260" stroke="#78350f" stroke-width="8" stroke-linecap="round"/>
+  <line x1="240" y1="140" x2="240" y2="260" stroke="#78350f" stroke-width="8" stroke-linecap="round"/>
+  <!-- Bethlehemster pal boven de nok -->
+  <polygon points="150,30 154,48 168,52 155,58 158,74 148,63 138,72 143,57 131,50 146,47" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+  <circle cx="150" cy="53" r="6" fill="#ffffff"/>
+  <!-- Houten kribbe poten (kruislings) -->
+  <line x1="105" y1="190" x2="135" y2="255" stroke="#92400e" stroke-width="6" stroke-linecap="round"/>
+  <line x1="135" y1="190" x2="105" y2="255" stroke="#78350f" stroke-width="6" stroke-linecap="round"/>
+  <line x1="165" y1="190" x2="195" y2="255" stroke="#92400e" stroke-width="6" stroke-linecap="round"/>
+  <line x1="195" y1="190" x2="165" y2="255" stroke="#78350f" stroke-width="6" stroke-linecap="round"/>
+  <!-- Kribbe bak met stro -->
+  <polygon points="90,185 210,185 195,225 105,225" fill="#b45309" stroke="#78350f" stroke-width="3"/>
+  <!-- Gouden stro sprietjes die eruit piepen -->
+  <path d="M85 185 L100 170 M95 185 L115 168 M110 185 L125 172 M175 185 L190 170 M185 185 L205 172 M195 185 L215 175" stroke="#fcd34d" stroke-width="3" stroke-linecap="round"/>
+  <!-- Het Kindje Jezus in doeken gewikkeld -->
+  <ellipse cx="150" cy="180" rx="36" ry="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <!-- Gouden aureool / halo -->
+  <circle cx="132" cy="172" r="16" fill="#fef08a" stroke="#f59e0b" stroke-width="1.5" opacity="0.85"/>
+  <!-- Baby hoofdje -->
+  <circle cx="132" cy="172" r="11" fill="#fed7aa"/>
+  <!-- Slapend gezichtje -->
+  <path d="M127 172 Q130 175 133 172" fill="none" stroke="#ea580c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Wikkeldoek bandjes -->
+  <line x1="145" y1="172" x2="155" y2="188" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="158" y1="172" x2="168" y2="188" stroke="#cbd5e1" stroke-width="2"/>
 </svg>
       </div>
 
-      <h2 class="figure-title">De Wijze & de Kameel</h2>
-      <p class="story-subtitle">Deel 3: De Wijzen uit het Oosten • ⏱️ ca. 5 min</p>
+      <h2 class="figure-title">Het Kindje in de Kribbe</h2>
+      <p class="story-subtitle">Lichtje 3: De warme adem • ⏱️ ca. 3 min</p>
 
       <!-- Zoekopdracht voor kinderen -->
       <div class="kid-mission">
-        <strong>👀 Speurders gezocht:</strong> Zoek de wijze reiziger met zijn kameel!
+        <strong>👀 Speurders gezocht:</strong> 👀 Zoek het kindje Jezus in de kribbe onder de ster!
       </div>
 
       <!-- Welkomstboodschap / verhaalinleiding -->
       <div class="welcome-text">
-        Kijk eens, de kameel rust hier uit! De wijzen volgden de ster. Luister naar het verhaal over hun bijzondere geschenken.
+        Midden in de nacht wordt het kindje Jezus geboren in de stal. Als een koude windvlaag binnenwaait, blazen Grauwtje en Brom hun warme adem over de kribbe.
       </div>
 
       <!-- Hero Audio Player -->
@@ -544,7 +542,7 @@
             <input type="range" id="seekSlider" class="seek-slider" min="0" max="100" value="0" step="0.5" oninput="onSeekChange(this.value)">
             <div class="time-row">
               <span id="currentTimeLabel">0:00</span>
-              <span id="durationLabel">ca. 5 min</span>
+              <span id="durationLabel">ca. 3 min</span>
             </div>
           </div>
 
@@ -591,8 +589,8 @@
           </button>
         </div>
         <div id="hintBody" class="hint-body">
-          <p class="hint-loc-title">Op weg naar Stop 4: Het Ezeltje 🫏</p>
-          <p>Loop rustig verder langs de sfeervolle lantaarns richting de pastorietuin / het verenigingsgebouw voor het trouwe ezeltje.</p>
+          <p class="hint-loc-title">Op weg naar Lichtje 4: Wolkje het Lammetje & de Herders 🐑</p>
+          <p>Buiten, boven de stal, staat een heldere, stralende ster. Loop maar verder naar het volgende lichtje, want daar krijgen ze bezoek!</p>
         </div>
       </section>
 
@@ -605,7 +603,7 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>Gemaakt in samenwerking met de kerken op Noord-Beveland</p>
+      <p>Een samenwerking van de kerkgemeenschap op Noord-Beveland, de basisscholen en de ezels van de Voedseldijk</p>
       <p style="margin-top: 6px;"><a href="../index.html">← Terug naar alle dorpen</a></p>
     </footer>
   </div>
