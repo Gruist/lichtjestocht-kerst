@@ -227,12 +227,12 @@
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 1.3fr 0.8fr;
+      grid-template-columns: 1.25fr 0.85fr;
       gap: clamp(20px, 3.5vw, 45px);
       align-items: center;
       flex: 1;
       margin: clamp(10px, 1.8vh, 20px) 0;
-    }}
+    }
 
     /* Linkerkolom: Highlights */
     .beamer-highlights {
@@ -241,7 +241,7 @@
       gap: clamp(8px, 1.5vh, 16px);
     }
     .highlight-card {
-      background: rgba(13, 27, 42, 0.8);
+      background: rgba(13, 27, 42, 0.82);
       border: 1px solid rgba(245, 158, 11, 0.25);
       border-left: 5px solid var(--gold-main);
       border-radius: 12px;
@@ -279,56 +279,68 @@
       font-weight: 700;
     }
 
-    /* Rechterkolom: Grote QR Kaart */
-    .beamer-qr-card {
-      background: #ffffff;
+    /* Rechterkolom: Sfeervolle Uitnodigingskaart met Ezel Grauwtje (Zonder QR om verrassing te borgen!) */
+    .beamer-adventure-card {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
       border-radius: clamp(16px, 2.2vw, 26px);
       padding: clamp(16px, 2.2vw, 26px);
       text-align: center;
-      box-shadow: 0 0 50px var(--gold-glow), 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 0 45px var(--gold-glow), 0 20px 40px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 4px solid var(--gold-main);
+      border: 3px solid var(--gold-main);
+      position: relative;
     }
-    .beamer-qr-title {
-      font-size: clamp(1.05rem, 1.8vw, 1.6rem);
-      font-weight: 900;
+    .beamer-adventure-badge {
+      display: inline-block;
+      background: var(--gold-main);
       color: #070d1e;
-      letter-spacing: 0.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: clamp(0.75rem, 1.15vw, 0.95rem);
+      font-weight: 800;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      line-height: 1.2;
+      margin-bottom: clamp(6px, 1vh, 10px);
     }
-    .beamer-qr-subtitle {
-      font-size: clamp(0.78rem, 1.2vw, 1.1rem);
-      font-weight: 700;
-      color: #d97706;
-      margin-bottom: clamp(6px, 1vh, 12px);
-    }
-    .beamer-qr-image-box {
-      width: clamp(140px, 20vw, 230px);
-      height: clamp(140px, 20vw, 230px);
-      background: #ffffff;
-      padding: 4px;
+    .beamer-fig-box {
+      width: clamp(140px, 18vw, 210px);
+      height: clamp(140px, 18vw, 210px);
       display: flex;
       align-items: center;
       justify-content: center;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+      margin: 4px 0;
     }
-    .beamer-qr-image-box svg {
+    .beamer-fig-box svg {
       width: 100%;
       height: 100%;
     }
-    .beamer-qr-url {
-      margin-top: clamp(6px, 1vh, 10px);
-      font-size: clamp(0.75rem, 1.15vw, 1rem);
-      font-weight: 800;
-      color: #1e293b;
-      background: #f1f5f9;
-      padding: 3px 10px;
-      border-radius: 8px;
-      font-family: monospace;
+    .beamer-adventure-title {
+      font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+      font-weight: 900;
+      color: #ffffff;
+      margin-top: 4px;
       letter-spacing: 0.5px;
+    }
+    .beamer-adventure-desc {
+      font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+      color: #cbd5e1;
+      line-height: 1.35;
+      margin: clamp(4px, 0.8vh, 8px) 0;
+      max-width: 320px;
+    }
+    .beamer-hint-pill {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border-card);
+      color: var(--gold-light);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: clamp(0.72rem, 1.1vw, 0.92rem);
+      font-weight: 700;
+      margin-top: 4px;
     }
 
     /* Footer */
@@ -454,10 +466,10 @@
       font-size: 15pt;
     }
 
-    /* Middenstuk: QR Code & Stappen */
-    .poster-scan-row {
+    /* Middenstuk: Ezel Grauwtje & Speurtocht Uitleg (Geen QR om de verrassing te bewaren!) */
+    .poster-adventure-row {
       display: grid;
-      grid-template-columns: 66mm 1fr;
+      grid-template-columns: 55mm 1fr;
       gap: 5mm;
       align-items: center;
       background: #f8fafc;
@@ -467,30 +479,37 @@
       color: #0f172a;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
-    .poster-qr-whitebox {
-      width: 63mm;
-      height: 63mm;
+    .poster-donkey-box {
       background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 10px;
-      padding: 3mm;
+      padding: 2mm;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    .poster-qr-whitebox svg {
+    .poster-donkey-box svg {
       width: 100%;
       height: 100%;
+      max-height: 48mm;
+    }
+    .poster-donkey-caption {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: #d97706;
+      margin-top: 1.5mm;
     }
     .poster-steps-col h3 {
-      font-size: 14pt;
+      font-size: 13.5pt;
       font-weight: 900;
       color: #0f172a;
       margin-bottom: 2mm;
     }
     .poster-steps-list {
-      font-size: 9.8pt;
+      font-size: 9.5pt;
       line-height: 1.4;
       color: #334155;
       padding-left: 4.5mm;
@@ -500,7 +519,7 @@
       background: #fef3c7;
       border-left: 4px solid var(--gold-main);
       padding: 2mm 3.5mm;
-      font-size: 9pt;
+      font-size: 8.8pt;
       font-weight: 700;
       color: #92400e;
       border-radius: 0 6px 6px 0;
@@ -685,7 +704,7 @@
         </div>
       </header>
 
-      <!-- Twee Kolommen: Verhaallijn links, Grote QR rechts -->
+      <!-- Twee Kolommen: Verhaallijn links, Sfeervolle uitnodiging rechts -->
       <div class="beamer-content">
         
         <!-- Linkerkolom: 3 Grote Highlights -->
@@ -698,7 +717,7 @@
 
           <div class="highlight-card">
             <h3>🎧 Luister naar het Kerstverhaal</h3>
-            <p>Scan bij elk lichtje de QR-code met je smartphone en luister samen naar het warme kerstverhaal, prachtig ingesproken door podcastmaker <strong>Rob Bakker</strong> (Landgoed Rijckholt).</p>
+            <p>Bij elk lichtje staat een bord met een QR-code. Scan ter plekke met je smartphone en luister samen naar het warme kerstverhaal, ingesproken door <strong>Rob Bakker</strong> (Landgoed Rijckholt).</p>
           </div>
 
           <div class="highlight-card">
@@ -714,14 +733,69 @@
 
         </div>
 
-        <!-- Rechterkolom: Grote Scanbare QR Kaart -->
-        <div class="beamer-qr-card">
-          <div class="beamer-qr-title">📱 Scan met je camera</div>
-          <div class="beamer-qr-subtitle">En ontdek de tocht in jouw dorp!</div>
-          <div class="beamer-qr-image-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" width="500" height="500" shape-rendering="crispEdges"><rect width="41" height="41" fill="#ffffff"/><path fill="#000000" d="M4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM7,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM10,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM21,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM26,4h1v1h-1zM27,4h1v1h-1zM30,4h1v1h-1zM31,4h1v1h-1zM32,4h1v1h-1zM33,4h1v1h-1zM34,4h1v1h-1zM35,4h1v1h-1zM36,4h1v1h-1zM4,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM14,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM20,5h1v1h-1zM21,5h1v1h-1zM25,5h1v1h-1zM30,5h1v1h-1zM36,5h1v1h-1zM4,6h1v1h-1zM6,6h1v1h-1zM7,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM13,6h1v1h-1zM14,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM17,6h1v1h-1zM19,6h1v1h-1zM23,6h1v1h-1zM25,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM30,6h1v1h-1zM32,6h1v1h-1zM33,6h1v1h-1zM34,6h1v1h-1zM36,6h1v1h-1zM4,7h1v1h-1zM6,7h1v1h-1zM7,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM14,7h1v1h-1zM19,7h1v1h-1zM20,7h1v1h-1zM22,7h1v1h-1zM26,7h1v1h-1zM28,7h1v1h-1zM30,7h1v1h-1zM32,7h1v1h-1zM33,7h1v1h-1zM34,7h1v1h-1zM36,7h1v1h-1zM4,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM17,8h1v1h-1zM20,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM33,8h1v1h-1zM34,8h1v1h-1zM36,8h1v1h-1zM4,9h1v1h-1zM10,9h1v1h-1zM12,9h1v1h-1zM14,9h1v1h-1zM15,9h1v1h-1zM16,9h1v1h-1zM20,9h1v1h-1zM21,9h1v1h-1zM25,9h1v1h-1zM26,9h1v1h-1zM30,9h1v1h-1zM36,9h1v1h-1zM4,10h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM12,10h1v1h-1zM14,10h1v1h-1zM16,10h1v1h-1zM18,10h1v1h-1zM20,10h1v1h-1zM22,10h1v1h-1zM24,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM30,10h1v1h-1zM31,10h1v1h-1zM32,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM35,10h1v1h-1zM36,10h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM17,11h1v1h-1zM18,11h1v1h-1zM20,11h1v1h-1zM22,11h1v1h-1zM24,11h1v1h-1zM25,11h1v1h-1zM27,11h1v1h-1zM28,11h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM7,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM11,12h1v1h-1zM14,12h1v1h-1zM16,12h1v1h-1zM19,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM31,12h1v1h-1zM32,12h1v1h-1zM36,12h1v1h-1zM4,13h1v1h-1zM6,13h1v1h-1zM8,13h1v1h-1zM9,13h1v1h-1zM11,13h1v1h-1zM12,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM25,13h1v1h-1zM27,13h1v1h-1zM30,13h1v1h-1zM31,13h1v1h-1zM33,13h1v1h-1zM34,13h1v1h-1zM36,13h1v1h-1zM4,14h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM11,14h1v1h-1zM13,14h1v1h-1zM14,14h1v1h-1zM15,14h1v1h-1zM16,14h1v1h-1zM18,14h1v1h-1zM19,14h1v1h-1zM21,14h1v1h-1zM24,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM30,14h1v1h-1zM32,14h1v1h-1zM34,14h1v1h-1zM35,14h1v1h-1zM4,15h1v1h-1zM6,15h1v1h-1zM7,15h1v1h-1zM9,15h1v1h-1zM11,15h1v1h-1zM14,15h1v1h-1zM21,15h1v1h-1zM22,15h1v1h-1zM24,15h1v1h-1zM25,15h1v1h-1zM28,15h1v1h-1zM30,15h1v1h-1zM32,15h1v1h-1zM33,15h1v1h-1zM34,15h1v1h-1zM35,15h1v1h-1zM36,15h1v1h-1zM4,16h1v1h-1zM5,16h1v1h-1zM6,16h1v1h-1zM9,16h1v1h-1zM10,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM15,16h1v1h-1zM16,16h1v1h-1zM17,16h1v1h-1zM18,16h1v1h-1zM20,16h1v1h-1zM24,16h1v1h-1zM27,16h1v1h-1zM28,16h1v1h-1zM29,16h1v1h-1zM31,16h1v1h-1zM32,16h1v1h-1zM33,16h1v1h-1zM35,16h1v1h-1zM36,16h1v1h-1zM4,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM8,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM17,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM27,17h1v1h-1zM30,17h1v1h-1zM33,17h1v1h-1zM35,17h1v1h-1zM36,17h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM9,18h1v1h-1zM10,18h1v1h-1zM11,18h1v1h-1zM12,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM18,18h1v1h-1zM22,18h1v1h-1zM24,18h1v1h-1zM26,18h1v1h-1zM29,18h1v1h-1zM30,18h1v1h-1zM31,18h1v1h-1zM34,18h1v1h-1zM35,18h1v1h-1zM4,19h1v1h-1zM6,19h1v1h-1zM7,19h1v1h-1zM9,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM16,19h1v1h-1zM17,19h1v1h-1zM19,19h1v1h-1zM20,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM25,19h1v1h-1zM27,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM33,19h1v1h-1zM34,19h1v1h-1zM5,20h1v1h-1zM10,20h1v1h-1zM11,20h1v1h-1zM15,20h1v1h-1zM17,20h1v1h-1zM18,20h1v1h-1zM19,20h1v1h-1zM24,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM32,20h1v1h-1zM36,20h1v1h-1zM4,21h1v1h-1zM7,21h1v1h-1zM12,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM23,21h1v1h-1zM24,21h1v1h-1zM27,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM33,21h1v1h-1zM34,21h1v1h-1zM36,21h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM7,22h1v1h-1zM10,22h1v1h-1zM14,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM21,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM29,22h1v1h-1zM31,22h1v1h-1zM32,22h1v1h-1zM34,22h1v1h-1zM4,23h1v1h-1zM6,23h1v1h-1zM12,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM22,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM29,23h1v1h-1zM31,23h1v1h-1zM32,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM35,23h1v1h-1zM36,23h1v1h-1zM5,24h1v1h-1zM8,24h1v1h-1zM9,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM16,24h1v1h-1zM17,24h1v1h-1zM19,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1zM24,24h1v1h-1zM26,24h1v1h-1zM28,24h1v1h-1zM29,24h1v1h-1zM32,24h1v1h-1zM33,24h1v1h-1zM35,24h1v1h-1zM36,24h1v1h-1zM4,25h1v1h-1zM6,25h1v1h-1zM7,25h1v1h-1zM13,25h1v1h-1zM15,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM21,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM25,25h1v1h-1zM27,25h1v1h-1zM29,25h1v1h-1zM30,25h1v1h-1zM36,25h1v1h-1zM4,26h1v1h-1zM9,26h1v1h-1zM10,26h1v1h-1zM18,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM29,26h1v1h-1zM31,26h1v1h-1zM33,26h1v1h-1zM34,26h1v1h-1zM35,26h1v1h-1zM4,27h1v1h-1zM6,27h1v1h-1zM9,27h1v1h-1zM11,27h1v1h-1zM14,27h1v1h-1zM17,27h1v1h-1zM19,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM26,27h1v1h-1zM29,27h1v1h-1zM30,27h1v1h-1zM31,27h1v1h-1zM32,27h1v1h-1zM33,27h1v1h-1zM34,27h1v1h-1zM35,27h1v1h-1zM4,28h1v1h-1zM6,28h1v1h-1zM7,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM14,28h1v1h-1zM15,28h1v1h-1zM18,28h1v1h-1zM20,28h1v1h-1zM22,28h1v1h-1zM26,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM30,28h1v1h-1zM31,28h1v1h-1zM32,28h1v1h-1zM35,28h1v1h-1zM36,28h1v1h-1zM12,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM16,29h1v1h-1zM17,29h1v1h-1zM19,29h1v1h-1zM21,29h1v1h-1zM23,29h1v1h-1zM24,29h1v1h-1zM27,29h1v1h-1zM28,29h1v1h-1zM32,29h1v1h-1zM34,29h1v1h-1zM36,29h1v1h-1zM4,30h1v1h-1zM5,30h1v1h-1zM6,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM15,30h1v1h-1zM17,30h1v1h-1zM19,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM27,30h1v1h-1zM28,30h1v1h-1zM30,30h1v1h-1zM32,30h1v1h-1zM34,30h1v1h-1zM35,30h1v1h-1zM4,31h1v1h-1zM10,31h1v1h-1zM12,31h1v1h-1zM14,31h1v1h-1zM15,31h1v1h-1zM18,31h1v1h-1zM20,31h1v1h-1zM22,31h1v1h-1zM24,31h1v1h-1zM25,31h1v1h-1zM26,31h1v1h-1zM27,31h1v1h-1zM28,31h1v1h-1zM32,31h1v1h-1zM33,31h1v1h-1zM34,31h1v1h-1zM35,31h1v1h-1zM4,32h1v1h-1zM6,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM15,32h1v1h-1zM17,32h1v1h-1zM18,32h1v1h-1zM19,32h1v1h-1zM20,32h1v1h-1zM21,32h1v1h-1zM24,32h1v1h-1zM26,32h1v1h-1zM28,32h1v1h-1zM29,32h1v1h-1zM30,32h1v1h-1zM31,32h1v1h-1zM32,32h1v1h-1zM33,32h1v1h-1zM36,32h1v1h-1zM4,33h1v1h-1zM6,33h1v1h-1zM7,33h1v1h-1zM8,33h1v1h-1zM10,33h1v1h-1zM12,33h1v1h-1zM13,33h1v1h-1zM14,33h1v1h-1zM16,33h1v1h-1zM17,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM20,33h1v1h-1zM23,33h1v1h-1zM24,33h1v1h-1zM29,33h1v1h-1zM32,33h1v1h-1zM34,33h1v1h-1zM36,33h1v1h-1zM4,34h1v1h-1zM6,34h1v1h-1zM7,34h1v1h-1zM8,34h1v1h-1zM10,34h1v1h-1zM12,34h1v1h-1zM17,34h1v1h-1zM19,34h1v1h-1zM24,34h1v1h-1zM25,34h1v1h-1zM28,34h1v1h-1zM29,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM33,34h1v1h-1zM4,35h1v1h-1zM10,35h1v1h-1zM12,35h1v1h-1zM13,35h1v1h-1zM15,35h1v1h-1zM17,35h1v1h-1zM19,35h1v1h-1zM20,35h1v1h-1zM24,35h1v1h-1zM25,35h1v1h-1zM26,35h1v1h-1zM27,35h1v1h-1zM32,35h1v1h-1zM33,35h1v1h-1zM34,35h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM6,36h1v1h-1zM7,36h1v1h-1zM8,36h1v1h-1zM9,36h1v1h-1zM10,36h1v1h-1zM13,36h1v1h-1zM14,36h1v1h-1zM18,36h1v1h-1zM19,36h1v1h-1zM24,36h1v1h-1zM26,36h1v1h-1zM27,36h1v1h-1zM28,36h1v1h-1zM29,36h1v1h-1zM30,36h1v1h-1zM31,36h1v1h-1zM35,36h1v1h-1z"/></svg>
+        <!-- Rechterkolom: Uitnodigingskaart met Ezel Grauwtje (Geen QR om de verrassing te bewaren!) -->
+        <div class="beamer-adventure-card">
+          <div class="beamer-adventure-badge">⭐ GA OP AVONTUUR!</div>
+          <div class="beamer-fig-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="200" height="200">
+  <defs>
+    <radialGradient id="donkeyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#94a3b8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#94a3b8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78716c"/>
+      <stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+  </defs>
+  <!-- Achtergrondgloed & Steenwegje naar Bethlehem -->
+  <circle cx="150" cy="150" r="140" fill="url(#donkeyGlow)"/>
+  <path d="M15 245 Q120 225 285 245 L285 280 L15 280 Z" fill="url(#pathGrad)"/>
+  <ellipse cx="60" cy="255" rx="14" ry="6" fill="#a8a29e"/>
+  <ellipse cx="120" cy="245" rx="16" ry="7" fill="#a8a29e"/>
+  <ellipse cx="190" cy="252" rx="18" ry="7" fill="#a8a29e"/>
+  <ellipse cx="250" cy="248" rx="15" ry="6" fill="#a8a29e"/>
+  <!-- Staartje met pluim -->
+  <path d="M210 180 Q235 195 230 220" fill="none" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="230" cy="222" r="5" fill="#334155"/>
+  <!-- Pootjes van de ezel -->
+  <g fill="#475569">
+    <rect x="110" y="195" width="11" height="48" rx="5"/>
+    <rect x="130" y="195" width="11" height="48" rx="5"/>
+    <rect x="175" y="195" width="11" height="48" rx="5"/>
+    <rect x="195" y="195" width="11" height="48" rx="5"/>
+    <!-- Hoefjes -->
+    <rect x="110" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="130" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="175" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="195" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+  </g>
+  <!-- Lichaam van het ezeltje -->
+  <ellipse cx="160" cy="180" rx="48" ry="32" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <!-- Zadel / deken voor Maria -->
+  <path d="M140 155 Q160 162 180 155 L180 185 Q160 190 140 185 Z" fill="#2563eb" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Nek en Hoofd -->
+  <path d="M130 180 L105 130 L80 145 L115 195 Z" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="88" cy="135" rx="24" ry="18" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <!-- Witte snuit -->
+  <ellipse cx="72" cy="140" rx="12" ry="11" fill="#f1f5f9"/>
+  <circle cx="68" cy="138" r="2.5" fill="#334155"/>
+  <circle cx="86" cy="130" r="3.5" fill="#0f172a"/>
+  <!-- Lange karakteristieke oren -->
+  <ellipse cx="98" cy="98" rx="7" ry="24" transform="rotate(-15 98 98)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="98" cy="98" rx="4" ry="18" transform="rotate(-15 98 98)" fill="#fbcfe8"/>
+  <ellipse cx="112" cy="102" rx="7" ry="24" transform="rotate(10 112 102)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="112" cy="102" rx="4" ry="18" transform="rotate(10 112 102)" fill="#fbcfe8"/>
+  <!-- Sfeervolle reis-lantaarn aan het tuig -->
+  <line x1="125" y1="165" x2="125" y2="185" stroke="#b45309" stroke-width="2"/>
+  <rect x="119" y="185" width="12" height="16" rx="2" fill="#fef08a" stroke="#78350f" stroke-width="1.5"/>
+  <circle cx="125" cy="193" r="3" fill="#ea580c"/>
+</svg>
           </div>
-          <div class="beamer-qr-url">gruist.github.io/lichtjestocht-kerst</div>
+          <div class="beamer-adventure-title">START BIJ DE DORPSKERK</div>
+          <p class="beamer-adventure-desc">Vind het bord met <strong>Lichtje 1</strong> bij de kerk. Scan daar pas de QR-code met je telefoon en laat je verrassen!</p>
+          <div class="beamer-hint-pill">🔍 5 Geheime Lichtjes per Dorp</div>
         </div>
 
       </div>
@@ -761,20 +835,76 @@
             <div class="p-fig-item"><span class="p-fig-icon">🐪</span><span>5. Wijzen & Ezels</span></div>
           </div>
 
-          <!-- Middenstuk: Grote QR-Code & Scaninstructies -->
-          <div class="poster-scan-row">
-            <div class="poster-qr-whitebox">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" width="500" height="500" shape-rendering="crispEdges"><rect width="41" height="41" fill="#ffffff"/><path fill="#000000" d="M4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM7,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM10,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM21,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM26,4h1v1h-1zM27,4h1v1h-1zM30,4h1v1h-1zM31,4h1v1h-1zM32,4h1v1h-1zM33,4h1v1h-1zM34,4h1v1h-1zM35,4h1v1h-1zM36,4h1v1h-1zM4,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM14,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM20,5h1v1h-1zM21,5h1v1h-1zM25,5h1v1h-1zM30,5h1v1h-1zM36,5h1v1h-1zM4,6h1v1h-1zM6,6h1v1h-1zM7,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM13,6h1v1h-1zM14,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM17,6h1v1h-1zM19,6h1v1h-1zM23,6h1v1h-1zM25,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM30,6h1v1h-1zM32,6h1v1h-1zM33,6h1v1h-1zM34,6h1v1h-1zM36,6h1v1h-1zM4,7h1v1h-1zM6,7h1v1h-1zM7,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM14,7h1v1h-1zM19,7h1v1h-1zM20,7h1v1h-1zM22,7h1v1h-1zM26,7h1v1h-1zM28,7h1v1h-1zM30,7h1v1h-1zM32,7h1v1h-1zM33,7h1v1h-1zM34,7h1v1h-1zM36,7h1v1h-1zM4,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM17,8h1v1h-1zM20,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM33,8h1v1h-1zM34,8h1v1h-1zM36,8h1v1h-1zM4,9h1v1h-1zM10,9h1v1h-1zM12,9h1v1h-1zM14,9h1v1h-1zM15,9h1v1h-1zM16,9h1v1h-1zM20,9h1v1h-1zM21,9h1v1h-1zM25,9h1v1h-1zM26,9h1v1h-1zM30,9h1v1h-1zM36,9h1v1h-1zM4,10h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM12,10h1v1h-1zM14,10h1v1h-1zM16,10h1v1h-1zM18,10h1v1h-1zM20,10h1v1h-1zM22,10h1v1h-1zM24,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM30,10h1v1h-1zM31,10h1v1h-1zM32,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM35,10h1v1h-1zM36,10h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM17,11h1v1h-1zM18,11h1v1h-1zM20,11h1v1h-1zM22,11h1v1h-1zM24,11h1v1h-1zM25,11h1v1h-1zM27,11h1v1h-1zM28,11h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM7,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM11,12h1v1h-1zM14,12h1v1h-1zM16,12h1v1h-1zM19,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM31,12h1v1h-1zM32,12h1v1h-1zM36,12h1v1h-1zM4,13h1v1h-1zM6,13h1v1h-1zM8,13h1v1h-1zM9,13h1v1h-1zM11,13h1v1h-1zM12,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM25,13h1v1h-1zM27,13h1v1h-1zM30,13h1v1h-1zM31,13h1v1h-1zM33,13h1v1h-1zM34,13h1v1h-1zM36,13h1v1h-1zM4,14h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM11,14h1v1h-1zM13,14h1v1h-1zM14,14h1v1h-1zM15,14h1v1h-1zM16,14h1v1h-1zM18,14h1v1h-1zM19,14h1v1h-1zM21,14h1v1h-1zM24,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM30,14h1v1h-1zM32,14h1v1h-1zM34,14h1v1h-1zM35,14h1v1h-1zM4,15h1v1h-1zM6,15h1v1h-1zM7,15h1v1h-1zM9,15h1v1h-1zM11,15h1v1h-1zM14,15h1v1h-1zM21,15h1v1h-1zM22,15h1v1h-1zM24,15h1v1h-1zM25,15h1v1h-1zM28,15h1v1h-1zM30,15h1v1h-1zM32,15h1v1h-1zM33,15h1v1h-1zM34,15h1v1h-1zM35,15h1v1h-1zM36,15h1v1h-1zM4,16h1v1h-1zM5,16h1v1h-1zM6,16h1v1h-1zM9,16h1v1h-1zM10,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM15,16h1v1h-1zM16,16h1v1h-1zM17,16h1v1h-1zM18,16h1v1h-1zM20,16h1v1h-1zM24,16h1v1h-1zM27,16h1v1h-1zM28,16h1v1h-1zM29,16h1v1h-1zM31,16h1v1h-1zM32,16h1v1h-1zM33,16h1v1h-1zM35,16h1v1h-1zM36,16h1v1h-1zM4,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM8,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM17,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM27,17h1v1h-1zM30,17h1v1h-1zM33,17h1v1h-1zM35,17h1v1h-1zM36,17h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM9,18h1v1h-1zM10,18h1v1h-1zM11,18h1v1h-1zM12,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM18,18h1v1h-1zM22,18h1v1h-1zM24,18h1v1h-1zM26,18h1v1h-1zM29,18h1v1h-1zM30,18h1v1h-1zM31,18h1v1h-1zM34,18h1v1h-1zM35,18h1v1h-1zM4,19h1v1h-1zM6,19h1v1h-1zM7,19h1v1h-1zM9,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM16,19h1v1h-1zM17,19h1v1h-1zM19,19h1v1h-1zM20,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM25,19h1v1h-1zM27,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM33,19h1v1h-1zM34,19h1v1h-1zM5,20h1v1h-1zM10,20h1v1h-1zM11,20h1v1h-1zM15,20h1v1h-1zM17,20h1v1h-1zM18,20h1v1h-1zM19,20h1v1h-1zM24,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM32,20h1v1h-1zM36,20h1v1h-1zM4,21h1v1h-1zM7,21h1v1h-1zM12,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM23,21h1v1h-1zM24,21h1v1h-1zM27,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM33,21h1v1h-1zM34,21h1v1h-1zM36,21h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM7,22h1v1h-1zM10,22h1v1h-1zM14,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM21,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM29,22h1v1h-1zM31,22h1v1h-1zM32,22h1v1h-1zM34,22h1v1h-1zM4,23h1v1h-1zM6,23h1v1h-1zM12,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM22,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM29,23h1v1h-1zM31,23h1v1h-1zM32,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM35,23h1v1h-1zM36,23h1v1h-1zM5,24h1v1h-1zM8,24h1v1h-1zM9,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM16,24h1v1h-1zM17,24h1v1h-1zM19,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1zM24,24h1v1h-1zM26,24h1v1h-1zM28,24h1v1h-1zM29,24h1v1h-1zM32,24h1v1h-1zM33,24h1v1h-1zM35,24h1v1h-1zM36,24h1v1h-1zM4,25h1v1h-1zM6,25h1v1h-1zM7,25h1v1h-1zM13,25h1v1h-1zM15,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM21,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM25,25h1v1h-1zM27,25h1v1h-1zM29,25h1v1h-1zM30,25h1v1h-1zM36,25h1v1h-1zM4,26h1v1h-1zM9,26h1v1h-1zM10,26h1v1h-1zM18,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM29,26h1v1h-1zM31,26h1v1h-1zM33,26h1v1h-1zM34,26h1v1h-1zM35,26h1v1h-1zM4,27h1v1h-1zM6,27h1v1h-1zM9,27h1v1h-1zM11,27h1v1h-1zM14,27h1v1h-1zM17,27h1v1h-1zM19,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM26,27h1v1h-1zM29,27h1v1h-1zM30,27h1v1h-1zM31,27h1v1h-1zM32,27h1v1h-1zM33,27h1v1h-1zM34,27h1v1h-1zM35,27h1v1h-1zM4,28h1v1h-1zM6,28h1v1h-1zM7,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM14,28h1v1h-1zM15,28h1v1h-1zM18,28h1v1h-1zM20,28h1v1h-1zM22,28h1v1h-1zM26,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM30,28h1v1h-1zM31,28h1v1h-1zM32,28h1v1h-1zM35,28h1v1h-1zM36,28h1v1h-1zM12,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM16,29h1v1h-1zM17,29h1v1h-1zM19,29h1v1h-1zM21,29h1v1h-1zM23,29h1v1h-1zM24,29h1v1h-1zM27,29h1v1h-1zM28,29h1v1h-1zM32,29h1v1h-1zM34,29h1v1h-1zM36,29h1v1h-1zM4,30h1v1h-1zM5,30h1v1h-1zM6,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM15,30h1v1h-1zM17,30h1v1h-1zM19,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM27,30h1v1h-1zM28,30h1v1h-1zM30,30h1v1h-1zM32,30h1v1h-1zM34,30h1v1h-1zM35,30h1v1h-1zM4,31h1v1h-1zM10,31h1v1h-1zM12,31h1v1h-1zM14,31h1v1h-1zM15,31h1v1h-1zM18,31h1v1h-1zM20,31h1v1h-1zM22,31h1v1h-1zM24,31h1v1h-1zM25,31h1v1h-1zM26,31h1v1h-1zM27,31h1v1h-1zM28,31h1v1h-1zM32,31h1v1h-1zM33,31h1v1h-1zM34,31h1v1h-1zM35,31h1v1h-1zM4,32h1v1h-1zM6,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM15,32h1v1h-1zM17,32h1v1h-1zM18,32h1v1h-1zM19,32h1v1h-1zM20,32h1v1h-1zM21,32h1v1h-1zM24,32h1v1h-1zM26,32h1v1h-1zM28,32h1v1h-1zM29,32h1v1h-1zM30,32h1v1h-1zM31,32h1v1h-1zM32,32h1v1h-1zM33,32h1v1h-1zM36,32h1v1h-1zM4,33h1v1h-1zM6,33h1v1h-1zM7,33h1v1h-1zM8,33h1v1h-1zM10,33h1v1h-1zM12,33h1v1h-1zM13,33h1v1h-1zM14,33h1v1h-1zM16,33h1v1h-1zM17,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM20,33h1v1h-1zM23,33h1v1h-1zM24,33h1v1h-1zM29,33h1v1h-1zM32,33h1v1h-1zM34,33h1v1h-1zM36,33h1v1h-1zM4,34h1v1h-1zM6,34h1v1h-1zM7,34h1v1h-1zM8,34h1v1h-1zM10,34h1v1h-1zM12,34h1v1h-1zM17,34h1v1h-1zM19,34h1v1h-1zM24,34h1v1h-1zM25,34h1v1h-1zM28,34h1v1h-1zM29,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM33,34h1v1h-1zM4,35h1v1h-1zM10,35h1v1h-1zM12,35h1v1h-1zM13,35h1v1h-1zM15,35h1v1h-1zM17,35h1v1h-1zM19,35h1v1h-1zM20,35h1v1h-1zM24,35h1v1h-1zM25,35h1v1h-1zM26,35h1v1h-1zM27,35h1v1h-1zM32,35h1v1h-1zM33,35h1v1h-1zM34,35h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM6,36h1v1h-1zM7,36h1v1h-1zM8,36h1v1h-1zM9,36h1v1h-1zM10,36h1v1h-1zM13,36h1v1h-1zM14,36h1v1h-1zM18,36h1v1h-1zM19,36h1v1h-1zM24,36h1v1h-1zM26,36h1v1h-1zM27,36h1v1h-1zM28,36h1v1h-1zM29,36h1v1h-1zM30,36h1v1h-1zM31,36h1v1h-1zM35,36h1v1h-1z"/></svg>
+          <!-- Middenstuk: Ezel Grauwtje & Speurtocht Uitleg (Geen QR om de verrassing te bewaren!) -->
+          <div class="poster-adventure-row">
+            <div class="poster-donkey-box">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="140" height="140">
+  <defs>
+    <radialGradient id="donkeyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#94a3b8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#94a3b8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78716c"/>
+      <stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+  </defs>
+  <!-- Achtergrondgloed & Steenwegje naar Bethlehem -->
+  <circle cx="150" cy="150" r="140" fill="url(#donkeyGlow)"/>
+  <path d="M15 245 Q120 225 285 245 L285 280 L15 280 Z" fill="url(#pathGrad)"/>
+  <ellipse cx="60" cy="255" rx="14" ry="6" fill="#a8a29e"/>
+  <ellipse cx="120" cy="245" rx="16" ry="7" fill="#a8a29e"/>
+  <ellipse cx="190" cy="252" rx="18" ry="7" fill="#a8a29e"/>
+  <ellipse cx="250" cy="248" rx="15" ry="6" fill="#a8a29e"/>
+  <!-- Staartje met pluim -->
+  <path d="M210 180 Q235 195 230 220" fill="none" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="230" cy="222" r="5" fill="#334155"/>
+  <!-- Pootjes van de ezel -->
+  <g fill="#475569">
+    <rect x="110" y="195" width="11" height="48" rx="5"/>
+    <rect x="130" y="195" width="11" height="48" rx="5"/>
+    <rect x="175" y="195" width="11" height="48" rx="5"/>
+    <rect x="195" y="195" width="11" height="48" rx="5"/>
+    <!-- Hoefjes -->
+    <rect x="110" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="130" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="175" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+    <rect x="195" y="238" width="11" height="6" rx="2" fill="#1e293b"/>
+  </g>
+  <!-- Lichaam van het ezeltje -->
+  <ellipse cx="160" cy="180" rx="48" ry="32" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <!-- Zadel / deken voor Maria -->
+  <path d="M140 155 Q160 162 180 155 L180 185 Q160 190 140 185 Z" fill="#2563eb" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Nek en Hoofd -->
+  <path d="M130 180 L105 130 L80 145 L115 195 Z" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="88" cy="135" rx="24" ry="18" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <!-- Witte snuit -->
+  <ellipse cx="72" cy="140" rx="12" ry="11" fill="#f1f5f9"/>
+  <circle cx="68" cy="138" r="2.5" fill="#334155"/>
+  <circle cx="86" cy="130" r="3.5" fill="#0f172a"/>
+  <!-- Lange karakteristieke oren -->
+  <ellipse cx="98" cy="98" rx="7" ry="24" transform="rotate(-15 98 98)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="98" cy="98" rx="4" ry="18" transform="rotate(-15 98 98)" fill="#fbcfe8"/>
+  <ellipse cx="112" cy="102" rx="7" ry="24" transform="rotate(10 112 102)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+  <ellipse cx="112" cy="102" rx="4" ry="18" transform="rotate(10 112 102)" fill="#fbcfe8"/>
+  <!-- Sfeervolle reis-lantaarn aan het tuig -->
+  <line x1="125" y1="165" x2="125" y2="185" stroke="#b45309" stroke-width="2"/>
+  <rect x="119" y="185" width="12" height="16" rx="2" fill="#fef08a" stroke="#78350f" stroke-width="1.5"/>
+  <circle cx="125" cy="193" r="3" fill="#ea580c"/>
+</svg>
+              <div class="poster-donkey-caption">🫏 Ezel Grauwtje wijst de weg!</div>
             </div>
             <div class="poster-steps-col">
-              <h3>📱 Scan & Wandel Mee!</h3>
+              <h3>🎄 Hoe werkt de tocht?</h3>
               <ol class="poster-steps-list">
-                <li><strong>Open de camera</strong> van je smartphone.</li>
-                <li><strong>Richt op de QR-code</strong> hiernaast en tik op de gele link.</li>
-                <li><strong>Kies je dorp</strong> en loop langs de 5 lichtjes!</li>
+                <li><strong>Trek je warme jas aan</strong> en neem gezellig een lampionnetje of zaklampje mee.</li>
+                <li><strong>Wandel naar het startpunt</strong> bij de dorpskerk en zoek het bord met <strong>Lichtje 1</strong>!</li>
+                <li><strong>Scan pas ter plekke</strong> de QR-code op het bord om het eerste verhaal te horen.</li>
+                <li><strong>Volg de geheime hints</strong> en speur met de kinderen naar alle 5 de lichtjes!</li>
               </ol>
               <div class="poster-voice-badge">
-                🎧 Met de warme vertelstem van <strong>Rob Bakker</strong> <em>(Landgoed Rijckholt)</em>
+                🎧 Met de warme vertelstem van podcastmaker <strong>Rob Bakker</strong> <em>(Landgoed Rijckholt)</em>
               </div>
             </div>
           </div>
@@ -812,8 +942,7 @@
 
           <!-- Footer -->
           <footer class="poster-footer-pad">
-            Een samenwerking van de kerkgemeenschap op Noord-Beveland, de basisscholen en de ezels van de Voedseldijk.<br>
-            <strong>Website: gruist.github.io/lichtjestocht-kerst</strong>
+            Een samenwerking van de kerkgemeenschap op Noord-Beveland, de basisscholen en de ezels van de Voedseldijk.
           </footer>
 
         </div>
