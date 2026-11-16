@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerk Aankondiging — Kerst Lichtjestocht Noord-Beveland</title>
+  <meta name="description" content="Beamer presentatie en printklare ophangposter voor de Kerst Lichtjestocht Noord-Beveland in de dorpskerken.">
+  <style>
+    :root {
+      --bg-dark: #070d1e;
+      --bg-card: rgba(13, 27, 42, 0.95);
+      --gold-main: #f59e0b;
+      --gold-light: #fef08a;
+      --gold-glow: rgba(245, 158, 11, 0.35);
+      --border-card: rgba(245, 158, 11, 0.3);
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #050914;
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* --- Vaste Werkbalk (Onzichtbaar bij Print & Fullscreen) --- */
+    .top-toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: rgba(7, 13, 30, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-card);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 12px;
+    }
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mode-tab {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mode-tab:hover {
+      background: rgba(245, 158, 11, 0.18);
+      border-color: var(--gold-main);
+      color: var(--gold-light);
+    }
+    .mode-tab.active {
+      background: var(--gold-main);
+      color: #070d1e;
+      border-color: var(--gold-main);
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+    .action-btn {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease;
+      text-decoration: none;
+    }
+    .action-btn:hover {
+      background: #1d4ed8;
+    }
+    .action-btn.print {
+      background: #10b981;
+    }
+    .action-btn.print:hover {
+      background: #059669;
+    }
+    .shortcut-badge {
+      display: inline-block;
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: monospace;
+      color: #fef08a;
+    }
+
+    /* --- Container & Views --- */
+    .view-wrapper {
+      padding-top: 52px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ========================================================
+       WEERGAVE 1: BEAMER PRESENTATIE (16:9 Breedbeeld)
+       ======================================================== */
+    .beamer-screen {
+      width: 100vw;
+      height: calc(100vh - 52px);
+      max-height: calc(100vw * 9 / 16);
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(ellipse at 75% 25%, #162a45 0%, #070d1e 75%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(18px, 3vh, 38px) clamp(24px, 4vw, 55px);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+    :fullscreen .beamer-screen {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+      padding: 3.5vh 4.5vw;
+    }
+    :fullscreen .top-toolbar {
+      display: none !important;
+    }
+
+    /* Fonkelende sterrenhemel */
+    .stars-layer {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 40px 60px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 180px, #fef08a, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 320px 90px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2.5px 2.5px at 580px 240px, #fde68a, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 800px 110px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 1050px 320px, #fef08a, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 1300px 140px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 1600px 260px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 1780px 80px, #fde68a, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 600px 400px;
+      opacity: 0.75;
+      z-index: 1;
+    }
+
+    .beamer-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid rgba(245, 158, 11, 0.25);
+      padding-bottom: clamp(8px, 1.5vh, 16px);
+    }
+    .beamer-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .beamer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid var(--border-card);
+      color: var(--gold-light);
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: clamp(0.72rem, 1.1vw, 0.95rem);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .beamer-title {
+      font-size: clamp(1.7rem, 3.4vw, 3.2rem);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      line-height: 1.1;
+    }
+    .beamer-subtitle {
+      font-size: clamp(0.9rem, 1.5vw, 1.35rem);
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+    .beamer-star-box {
+      width: clamp(70px, 7.5vw, 105px);
+      height: clamp(70px, 7.5vw, 105px);
+      filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.5));
+      flex-shrink: 0;
+    }
+    .beamer-star-box svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Beamer Midden Content (2 Kolommen) */
+    .beamer-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr;
+      gap: clamp(20px, 3.5vw, 45px);
+      align-items: center;
+      flex: 1;
+      margin: clamp(10px, 1.8vh, 20px) 0;
+    }}
+
+    /* Linkerkolom: Highlights */
+    .beamer-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5vh, 16px);
+    }
+    .highlight-card {
+      background: rgba(13, 27, 42, 0.8);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-left: 5px solid var(--gold-main);
+      border-radius: 12px;
+      padding: clamp(8px, 1.5vh, 14px) clamp(12px, 1.8vw, 20px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .highlight-card h3 {
+      font-size: clamp(1rem, 1.7vw, 1.4rem);
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3px;
+    }
+    .highlight-card p {
+      font-size: clamp(0.82rem, 1.25vw, 1.1rem);
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+    .villages-pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .village-pill {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: clamp(0.7rem, 1.05vw, 0.9rem);
+      font-weight: 700;
+    }
+
+    /* Rechterkolom: Grote QR Kaart */
+    .beamer-qr-card {
+      background: #ffffff;
+      border-radius: clamp(16px, 2.2vw, 26px);
+      padding: clamp(16px, 2.2vw, 26px);
+      text-align: center;
+      box-shadow: 0 0 50px var(--gold-glow), 0 20px 40px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid var(--gold-main);
+    }
+    .beamer-qr-title {
+      font-size: clamp(1.05rem, 1.8vw, 1.6rem);
+      font-weight: 900;
+      color: #070d1e;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .beamer-qr-subtitle {
+      font-size: clamp(0.78rem, 1.2vw, 1.1rem);
+      font-weight: 700;
+      color: #d97706;
+      margin-bottom: clamp(6px, 1vh, 12px);
+    }
+    .beamer-qr-image-box {
+      width: clamp(140px, 20vw, 230px);
+      height: clamp(140px, 20vw, 230px);
+      background: #ffffff;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .beamer-qr-image-box svg {
+      width: 100%;
+      height: 100%;
+    }
+    .beamer-qr-url {
+      margin-top: clamp(6px, 1vh, 10px);
+      font-size: clamp(0.75rem, 1.15vw, 1rem);
+      font-weight: 800;
+      color: #1e293b;
+      background: #f1f5f9;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    /* Footer */
+    .beamer-footer {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: clamp(8px, 1.2vh, 12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: clamp(0.72rem, 1.1vw, 0.92rem);
+      color: var(--text-muted);
+    }
+    .beamer-footer-left {
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    .beamer-footer-right {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    /* ========================================================
+       WEERGAVE 2: OPHANGPOSTER (A4 Staand - Print & Prikbord)
+       ======================================================== */
+    .poster-view {
+      display: none; /* Wordt getoond via mode-switcher of @media print */
+      padding: 30px 16px;
+    }
+    .poster-sheet {
+      width: 210mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      margin: 0 auto;
+      background: #091326;
+      color: #f8fafc;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+      position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    /* Dubbel lamineerkader conform standaarden */
+    .poster-lamination-frame {
+      position: absolute;
+      top: 8mm;
+      bottom: 8mm;
+      left: 8mm;
+      right: 8mm;
+      border: 3.5px solid var(--gold-main);
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 2px rgba(254, 240, 138, 0.4);
+      z-index: 10;
+    }
+    .poster-content-pad {
+      padding: 13mm 14mm 11mm 14mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .poster-top-header {
+      text-align: center;
+      border-bottom: 2px solid rgba(245, 158, 11, 0.35);
+      padding-bottom: 3mm;
+    }
+    .poster-church-tag {
+      display: inline-block;
+      font-size: 8.5pt;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      background: rgba(245, 158, 11, 0.15);
+      padding: 2.5px 10px;
+      border-radius: 12px;
+      margin-bottom: 2mm;
+    }
+    .poster-main-title {
+      font-size: 26pt;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      line-height: 1.1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .poster-sub-title {
+      font-size: 11.5pt;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-top: 1.5mm;
+    }
+
+    /* Figuren Lint */
+    .poster-figures-strip {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: rgba(13, 27, 42, 0.9);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 2.5mm 3mm;
+      margin: 3mm 0;
+    }
+    .p-fig-item {
+      text-align: center;
+      font-size: 8pt;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1mm;
+    }
+    .p-fig-icon {
+      font-size: 15pt;
+    }
+
+    /* Middenstuk: QR Code & Stappen */
+    .poster-scan-row {
+      display: grid;
+      grid-template-columns: 66mm 1fr;
+      gap: 5mm;
+      align-items: center;
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 4mm 5mm;
+      color: #0f172a;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .poster-qr-whitebox {
+      width: 63mm;
+      height: 63mm;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 3mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .poster-qr-whitebox svg {
+      width: 100%;
+      height: 100%;
+    }
+    .poster-steps-col h3 {
+      font-size: 14pt;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 2mm;
+    }
+    .poster-steps-list {
+      font-size: 9.8pt;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 4.5mm;
+      margin-bottom: 2.5mm;
+    }
+    .poster-voice-badge {
+      background: #fef3c7;
+      border-left: 4px solid var(--gold-main);
+      padding: 2mm 3.5mm;
+      font-size: 9pt;
+      font-weight: 700;
+      color: #92400e;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Startlocaties per Dorp Grid */
+    .poster-dorpen-box {
+      background: rgba(13, 27, 42, 0.85);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 3mm 4mm;
+      margin: 2.5mm 0;
+    }
+    .poster-dorpen-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 2mm;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .poster-dorpen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2mm 4mm;
+      font-size: 8.2pt;
+      color: #e2e8f0;
+    }
+    .poster-dorp-entry strong {
+      color: #ffffff;
+    }
+
+    /* Praktische Tips */
+    .poster-tips-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2.5mm;
+      margin: 2mm 0;
+    }
+    .poster-tip-badge {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 2mm 2.5mm;
+      text-align: center;
+      font-size: 7.6pt;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .poster-tip-badge strong {
+      display: block;
+      color: #ffffff;
+      font-size: 8.2pt;
+      margin-bottom: 0.5mm;
+    }
+
+    /* Footer */
+    .poster-footer-pad {
+      border-top: 1.5px solid rgba(245, 158, 11, 0.3);
+      padding-top: 2.5mm;
+      text-align: center;
+      font-size: 7.6pt;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* ========================================================
+       PRINT MEDIA STYLES (A4 Staand - Exact 1 Pagina)
+       ======================================================== */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      html, body {
+        background: #091326 !important;
+        color: #f8fafc !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .top-toolbar, .no-print {
+        display: none !important;
+      }
+      .view-wrapper {
+        padding: 0 !important;
+      }
+      .beamer-screen {
+        display: none !important;
+      }
+      .poster-view {
+        display: block !important;
+        padding: 0 !important;
+      }
+      .poster-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        box-shadow: none !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Zwevende Werkbalk (Verborgen bij Print en Fullscreen) -->
+  <header class="top-toolbar no-print">
+    <div class="toolbar-left">
+      <span style="font-weight: 800; color: var(--gold-main); font-size: 0.95rem;">⭐ Kerk Display</span>
+      <button class="mode-tab active" id="tabBeamer" onclick="switchMode('beamer')" title="Toets 1 of B">
+        🖥️ Beamer Scherm (16:9) <span class="shortcut-badge">B</span>
+      </button>
+      <button class="mode-tab" id="tabPoster" onclick="switchMode('poster')" title="Toets 2 of O">
+        📄 Ophangposter (A4) <span class="shortcut-badge">O</span>
+      </button>
+    </div>
+    <div class="toolbar-right">
+      <button class="action-btn" onclick="toggleFullScreen()" title="Toets F voor schermvullende beamer weergave">
+        ⛶ Schermvullend <span class="shortcut-badge">F</span>
+      </button>
+      <button class="action-btn print" onclick="printPoster()" title="Toets P">
+        🖨️ Poster Afdrukken <span class="shortcut-badge">P</span>
+      </button>
+      <a href="index.html" class="action-btn" style="background: rgba(255,255,255,0.12);" title="Naar overzicht">
+        ← Terug
+      </a>
+    </div>
+  </header>
+
+  <main class="view-wrapper">
+
+    <!-- ========================================================
+         MODUS 1: BEAMER PRESENTATIE SLIDE (16:9)
+         ======================================================== -->
+    <section class="beamer-screen" id="beamerView">
+      <div class="stars-layer"></div>
+
+      <!-- Header met Bethlehemster -->
+      <header class="beamer-header">
+        <div class="beamer-header-left">
+          <div class="beamer-star-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="110" height="110">
+  <defs>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8db" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#f59e0b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <!-- Gloed cirkel -->
+  <circle cx="150" cy="150" r="140" fill="url(#starGlow)"/>
+  <!-- Secundaire stralen -->
+  <g transform="rotate(45 150 150)" opacity="0.75">
+    <path d="M150 50 Q150 150 50 150 Q150 150 150 250 Q150 150 250 150 Q150 150 150 50 Z" fill="#fef3c7"/>
+  </g>
+  <!-- Hoofdster (grote Bethlehemster met verlengde onderstraal) -->
+  <path d="M150 20 Q150 150 60 150 Q150 150 150 280 Q150 150 240 150 Q150 150 150 20 Z" fill="url(#starGold)" stroke="#b45309" stroke-width="2"/>
+  <!-- Glans in kern -->
+  <circle cx="150" cy="150" r="24" fill="#ffffff" filter="drop-shadow(0 0 8px #fde047)"/>
+  <!-- Kleine fonkelsterretjes eromheen -->
+  <polygon points="60,60 63,70 73,73 63,76 60,86 57,76 47,73 57,70" fill="#fde68a"/>
+  <polygon points="240,70 242,77 249,79 242,81 240,88 238,81 231,79 238,77" fill="#fde68a"/>
+  <polygon points="50,220 52,226 58,228 52,230 50,236 48,230 42,228 48,226" fill="#fde68a"/>
+  <polygon points="240,210 243,218 251,220 243,222 240,230 237,222 229,220 237,218" fill="#fde68a"/>
+</svg>
+          </div>
+          <div>
+            <span class="beamer-badge">⭐ Kerst 2026 · Noord-Beveland</span>
+            <h1 class="beamer-title">KERST LICHTJESTOCHT</h1>
+            <p class="beamer-subtitle">Het kerstverhaal door de grote oren van ezel Grauwtje</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Twee Kolommen: Verhaallijn links, Grote QR rechts -->
+      <div class="beamer-content">
+        
+        <!-- Linkerkolom: 3 Grote Highlights -->
+        <div class="beamer-highlights">
+          
+          <div class="highlight-card">
+            <h3>🌟 5 Sfeervolle Lichtjes in Jouw Dorp</h3>
+            <p>Wandel met het hele gezin langs 5 gezellige kerststops. Zoek met de kinderen naar Grauwtje de ezel, Brom de os, het kindje in de kribbe, Wolkje het lammetje en de wijze op zijn kameel!</p>
+          </div>
+
+          <div class="highlight-card">
+            <h3>🎧 Luister naar het Kerstverhaal</h3>
+            <p>Scan bij elk lichtje de QR-code met je smartphone en luister samen naar het warme kerstverhaal, prachtig ingesproken door podcastmaker <strong>Rob Bakker</strong> (Landgoed Rijckholt).</p>
+          </div>
+
+          <div class="highlight-card">
+            <h3>🚶 Vrije Start bij de Dorpskerk</h3>
+            <p>Wandel wanneer het jullie uitkomt tijdens de kerstdagen. Duur: ca. 45–60 minuten. Gratis & geschikt voor jong en oud!</p>
+            <div class="villages-pill-row">
+              <span class="village-pill">📍 Kamperland (Kerk De Ark)</span>
+              <span class="village-pill">📍 Wissenkerke (Voorstraat 20)</span>
+              <span class="village-pill">📍 Colijnsplaat (Havelaarstr. 30)</span>
+              <span class="village-pill">📍 Kortgene (Nicolaaskerk)</span>
+              <span class="village-pill">📍 Kats</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Rechterkolom: Grote Scanbare QR Kaart -->
+        <div class="beamer-qr-card">
+          <div class="beamer-qr-title">📱 Scan met je camera</div>
+          <div class="beamer-qr-subtitle">En ontdek de tocht in jouw dorp!</div>
+          <div class="beamer-qr-image-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" width="500" height="500" shape-rendering="crispEdges"><rect width="41" height="41" fill="#ffffff"/><path fill="#000000" d="M4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM7,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM10,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM21,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM26,4h1v1h-1zM27,4h1v1h-1zM30,4h1v1h-1zM31,4h1v1h-1zM32,4h1v1h-1zM33,4h1v1h-1zM34,4h1v1h-1zM35,4h1v1h-1zM36,4h1v1h-1zM4,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM14,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM20,5h1v1h-1zM21,5h1v1h-1zM25,5h1v1h-1zM30,5h1v1h-1zM36,5h1v1h-1zM4,6h1v1h-1zM6,6h1v1h-1zM7,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM13,6h1v1h-1zM14,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM17,6h1v1h-1zM19,6h1v1h-1zM23,6h1v1h-1zM25,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM30,6h1v1h-1zM32,6h1v1h-1zM33,6h1v1h-1zM34,6h1v1h-1zM36,6h1v1h-1zM4,7h1v1h-1zM6,7h1v1h-1zM7,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM14,7h1v1h-1zM19,7h1v1h-1zM20,7h1v1h-1zM22,7h1v1h-1zM26,7h1v1h-1zM28,7h1v1h-1zM30,7h1v1h-1zM32,7h1v1h-1zM33,7h1v1h-1zM34,7h1v1h-1zM36,7h1v1h-1zM4,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM17,8h1v1h-1zM20,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM33,8h1v1h-1zM34,8h1v1h-1zM36,8h1v1h-1zM4,9h1v1h-1zM10,9h1v1h-1zM12,9h1v1h-1zM14,9h1v1h-1zM15,9h1v1h-1zM16,9h1v1h-1zM20,9h1v1h-1zM21,9h1v1h-1zM25,9h1v1h-1zM26,9h1v1h-1zM30,9h1v1h-1zM36,9h1v1h-1zM4,10h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM12,10h1v1h-1zM14,10h1v1h-1zM16,10h1v1h-1zM18,10h1v1h-1zM20,10h1v1h-1zM22,10h1v1h-1zM24,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM30,10h1v1h-1zM31,10h1v1h-1zM32,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM35,10h1v1h-1zM36,10h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM17,11h1v1h-1zM18,11h1v1h-1zM20,11h1v1h-1zM22,11h1v1h-1zM24,11h1v1h-1zM25,11h1v1h-1zM27,11h1v1h-1zM28,11h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM7,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM11,12h1v1h-1zM14,12h1v1h-1zM16,12h1v1h-1zM19,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM31,12h1v1h-1zM32,12h1v1h-1zM36,12h1v1h-1zM4,13h1v1h-1zM6,13h1v1h-1zM8,13h1v1h-1zM9,13h1v1h-1zM11,13h1v1h-1zM12,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM25,13h1v1h-1zM27,13h1v1h-1zM30,13h1v1h-1zM31,13h1v1h-1zM33,13h1v1h-1zM34,13h1v1h-1zM36,13h1v1h-1zM4,14h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM11,14h1v1h-1zM13,14h1v1h-1zM14,14h1v1h-1zM15,14h1v1h-1zM16,14h1v1h-1zM18,14h1v1h-1zM19,14h1v1h-1zM21,14h1v1h-1zM24,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM30,14h1v1h-1zM32,14h1v1h-1zM34,14h1v1h-1zM35,14h1v1h-1zM4,15h1v1h-1zM6,15h1v1h-1zM7,15h1v1h-1zM9,15h1v1h-1zM11,15h1v1h-1zM14,15h1v1h-1zM21,15h1v1h-1zM22,15h1v1h-1zM24,15h1v1h-1zM25,15h1v1h-1zM28,15h1v1h-1zM30,15h1v1h-1zM32,15h1v1h-1zM33,15h1v1h-1zM34,15h1v1h-1zM35,15h1v1h-1zM36,15h1v1h-1zM4,16h1v1h-1zM5,16h1v1h-1zM6,16h1v1h-1zM9,16h1v1h-1zM10,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM15,16h1v1h-1zM16,16h1v1h-1zM17,16h1v1h-1zM18,16h1v1h-1zM20,16h1v1h-1zM24,16h1v1h-1zM27,16h1v1h-1zM28,16h1v1h-1zM29,16h1v1h-1zM31,16h1v1h-1zM32,16h1v1h-1zM33,16h1v1h-1zM35,16h1v1h-1zM36,16h1v1h-1zM4,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM8,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM17,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM27,17h1v1h-1zM30,17h1v1h-1zM33,17h1v1h-1zM35,17h1v1h-1zM36,17h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM9,18h1v1h-1zM10,18h1v1h-1zM11,18h1v1h-1zM12,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM18,18h1v1h-1zM22,18h1v1h-1zM24,18h1v1h-1zM26,18h1v1h-1zM29,18h1v1h-1zM30,18h1v1h-1zM31,18h1v1h-1zM34,18h1v1h-1zM35,18h1v1h-1zM4,19h1v1h-1zM6,19h1v1h-1zM7,19h1v1h-1zM9,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM16,19h1v1h-1zM17,19h1v1h-1zM19,19h1v1h-1zM20,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM25,19h1v1h-1zM27,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM33,19h1v1h-1zM34,19h1v1h-1zM5,20h1v1h-1zM10,20h1v1h-1zM11,20h1v1h-1zM15,20h1v1h-1zM17,20h1v1h-1zM18,20h1v1h-1zM19,20h1v1h-1zM24,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM32,20h1v1h-1zM36,20h1v1h-1zM4,21h1v1h-1zM7,21h1v1h-1zM12,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM23,21h1v1h-1zM24,21h1v1h-1zM27,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM33,21h1v1h-1zM34,21h1v1h-1zM36,21h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM7,22h1v1h-1zM10,22h1v1h-1zM14,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM21,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM29,22h1v1h-1zM31,22h1v1h-1zM32,22h1v1h-1zM34,22h1v1h-1zM4,23h1v1h-1zM6,23h1v1h-1zM12,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM22,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM29,23h1v1h-1zM31,23h1v1h-1zM32,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM35,23h1v1h-1zM36,23h1v1h-1zM5,24h1v1h-1zM8,24h1v1h-1zM9,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM16,24h1v1h-1zM17,24h1v1h-1zM19,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1zM24,24h1v1h-1zM26,24h1v1h-1zM28,24h1v1h-1zM29,24h1v1h-1zM32,24h1v1h-1zM33,24h1v1h-1zM35,24h1v1h-1zM36,24h1v1h-1zM4,25h1v1h-1zM6,25h1v1h-1zM7,25h1v1h-1zM13,25h1v1h-1zM15,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM21,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM25,25h1v1h-1zM27,25h1v1h-1zM29,25h1v1h-1zM30,25h1v1h-1zM36,25h1v1h-1zM4,26h1v1h-1zM9,26h1v1h-1zM10,26h1v1h-1zM18,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM29,26h1v1h-1zM31,26h1v1h-1zM33,26h1v1h-1zM34,26h1v1h-1zM35,26h1v1h-1zM4,27h1v1h-1zM6,27h1v1h-1zM9,27h1v1h-1zM11,27h1v1h-1zM14,27h1v1h-1zM17,27h1v1h-1zM19,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM26,27h1v1h-1zM29,27h1v1h-1zM30,27h1v1h-1zM31,27h1v1h-1zM32,27h1v1h-1zM33,27h1v1h-1zM34,27h1v1h-1zM35,27h1v1h-1zM4,28h1v1h-1zM6,28h1v1h-1zM7,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM14,28h1v1h-1zM15,28h1v1h-1zM18,28h1v1h-1zM20,28h1v1h-1zM22,28h1v1h-1zM26,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM30,28h1v1h-1zM31,28h1v1h-1zM32,28h1v1h-1zM35,28h1v1h-1zM36,28h1v1h-1zM12,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM16,29h1v1h-1zM17,29h1v1h-1zM19,29h1v1h-1zM21,29h1v1h-1zM23,29h1v1h-1zM24,29h1v1h-1zM27,29h1v1h-1zM28,29h1v1h-1zM32,29h1v1h-1zM34,29h1v1h-1zM36,29h1v1h-1zM4,30h1v1h-1zM5,30h1v1h-1zM6,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM15,30h1v1h-1zM17,30h1v1h-1zM19,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM27,30h1v1h-1zM28,30h1v1h-1zM30,30h1v1h-1zM32,30h1v1h-1zM34,30h1v1h-1zM35,30h1v1h-1zM4,31h1v1h-1zM10,31h1v1h-1zM12,31h1v1h-1zM14,31h1v1h-1zM15,31h1v1h-1zM18,31h1v1h-1zM20,31h1v1h-1zM22,31h1v1h-1zM24,31h1v1h-1zM25,31h1v1h-1zM26,31h1v1h-1zM27,31h1v1h-1zM28,31h1v1h-1zM32,31h1v1h-1zM33,31h1v1h-1zM34,31h1v1h-1zM35,31h1v1h-1zM4,32h1v1h-1zM6,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM15,32h1v1h-1zM17,32h1v1h-1zM18,32h1v1h-1zM19,32h1v1h-1zM20,32h1v1h-1zM21,32h1v1h-1zM24,32h1v1h-1zM26,32h1v1h-1zM28,32h1v1h-1zM29,32h1v1h-1zM30,32h1v1h-1zM31,32h1v1h-1zM32,32h1v1h-1zM33,32h1v1h-1zM36,32h1v1h-1zM4,33h1v1h-1zM6,33h1v1h-1zM7,33h1v1h-1zM8,33h1v1h-1zM10,33h1v1h-1zM12,33h1v1h-1zM13,33h1v1h-1zM14,33h1v1h-1zM16,33h1v1h-1zM17,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM20,33h1v1h-1zM23,33h1v1h-1zM24,33h1v1h-1zM29,33h1v1h-1zM32,33h1v1h-1zM34,33h1v1h-1zM36,33h1v1h-1zM4,34h1v1h-1zM6,34h1v1h-1zM7,34h1v1h-1zM8,34h1v1h-1zM10,34h1v1h-1zM12,34h1v1h-1zM17,34h1v1h-1zM19,34h1v1h-1zM24,34h1v1h-1zM25,34h1v1h-1zM28,34h1v1h-1zM29,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM33,34h1v1h-1zM4,35h1v1h-1zM10,35h1v1h-1zM12,35h1v1h-1zM13,35h1v1h-1zM15,35h1v1h-1zM17,35h1v1h-1zM19,35h1v1h-1zM20,35h1v1h-1zM24,35h1v1h-1zM25,35h1v1h-1zM26,35h1v1h-1zM27,35h1v1h-1zM32,35h1v1h-1zM33,35h1v1h-1zM34,35h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM6,36h1v1h-1zM7,36h1v1h-1zM8,36h1v1h-1zM9,36h1v1h-1zM10,36h1v1h-1zM13,36h1v1h-1zM14,36h1v1h-1zM18,36h1v1h-1zM19,36h1v1h-1zM24,36h1v1h-1zM26,36h1v1h-1zM27,36h1v1h-1zM28,36h1v1h-1zM29,36h1v1h-1zM30,36h1v1h-1zM31,36h1v1h-1zM35,36h1v1h-1z"/></svg>
+          </div>
+          <div class="beamer-qr-url">gruist.github.io/lichtjestocht-kerst</div>
+        </div>
+
+      </div>
+
+      <!-- Beamer Footer -->
+      <footer class="beamer-footer">
+        <div class="beamer-footer-left">
+          Een samenwerking van de kerkgemeenschap op Noord-Beveland, de basisscholen en de ezels van de Voedseldijk.
+        </div>
+        <div class="beamer-footer-right">
+          Tip: Druk op <strong>F</strong> voor volledig scherm
+        </div>
+      </footer>
+    </section>
+
+    <!-- ========================================================
+         MODUS 2: OPHANGPOSTER (A4 / A3 PRINTKLAAR)
+         ======================================================== -->
+    <section class="poster-view" id="posterView">
+      <div class="poster-sheet">
+        <div class="poster-lamination-frame"></div>
+        <div class="poster-content-pad">
+          
+          <!-- Top Header -->
+          <header class="poster-top-header">
+            <span class="poster-church-tag">Protestantse Gemeenten Noord-Beveland · Kerst 2026</span>
+            <h1 class="poster-main-title">KERST LICHTJESTOCHT</h1>
+            <p class="poster-sub-title">Het kerstverhaal door de grote oren van ezel Grauwtje</p>
+          </header>
+
+          <!-- De 5 Kerstfiguren -->
+          <div class="poster-figures-strip">
+            <div class="p-fig-item"><span class="p-fig-icon">🫏</span><span>1. Grauwtje</span></div>
+            <div class="p-fig-item"><span class="p-fig-icon">🐂</span><span>2. Brom de Os</span></div>
+            <div class="p-fig-item"><span class="p-fig-icon">👶</span><span>3. In de Kribbe</span></div>
+            <div class="p-fig-item"><span class="p-fig-icon">🐑</span><span>4. Wolkje & Herders</span></div>
+            <div class="p-fig-item"><span class="p-fig-icon">🐪</span><span>5. Wijzen & Ezels</span></div>
+          </div>
+
+          <!-- Middenstuk: Grote QR-Code & Scaninstructies -->
+          <div class="poster-scan-row">
+            <div class="poster-qr-whitebox">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" width="500" height="500" shape-rendering="crispEdges"><rect width="41" height="41" fill="#ffffff"/><path fill="#000000" d="M4,4h1v1h-1zM5,4h1v1h-1zM6,4h1v1h-1zM7,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM10,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM21,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM26,4h1v1h-1zM27,4h1v1h-1zM30,4h1v1h-1zM31,4h1v1h-1zM32,4h1v1h-1zM33,4h1v1h-1zM34,4h1v1h-1zM35,4h1v1h-1zM36,4h1v1h-1zM4,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM14,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM20,5h1v1h-1zM21,5h1v1h-1zM25,5h1v1h-1zM30,5h1v1h-1zM36,5h1v1h-1zM4,6h1v1h-1zM6,6h1v1h-1zM7,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM13,6h1v1h-1zM14,6h1v1h-1zM15,6h1v1h-1zM16,6h1v1h-1zM17,6h1v1h-1zM19,6h1v1h-1zM23,6h1v1h-1zM25,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM30,6h1v1h-1zM32,6h1v1h-1zM33,6h1v1h-1zM34,6h1v1h-1zM36,6h1v1h-1zM4,7h1v1h-1zM6,7h1v1h-1zM7,7h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM14,7h1v1h-1zM19,7h1v1h-1zM20,7h1v1h-1zM22,7h1v1h-1zM26,7h1v1h-1zM28,7h1v1h-1zM30,7h1v1h-1zM32,7h1v1h-1zM33,7h1v1h-1zM34,7h1v1h-1zM36,7h1v1h-1zM4,8h1v1h-1zM6,8h1v1h-1zM7,8h1v1h-1zM8,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM17,8h1v1h-1zM20,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM30,8h1v1h-1zM32,8h1v1h-1zM33,8h1v1h-1zM34,8h1v1h-1zM36,8h1v1h-1zM4,9h1v1h-1zM10,9h1v1h-1zM12,9h1v1h-1zM14,9h1v1h-1zM15,9h1v1h-1zM16,9h1v1h-1zM20,9h1v1h-1zM21,9h1v1h-1zM25,9h1v1h-1zM26,9h1v1h-1zM30,9h1v1h-1zM36,9h1v1h-1zM4,10h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM9,10h1v1h-1zM10,10h1v1h-1zM12,10h1v1h-1zM14,10h1v1h-1zM16,10h1v1h-1zM18,10h1v1h-1zM20,10h1v1h-1zM22,10h1v1h-1zM24,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM30,10h1v1h-1zM31,10h1v1h-1zM32,10h1v1h-1zM33,10h1v1h-1zM34,10h1v1h-1zM35,10h1v1h-1zM36,10h1v1h-1zM13,11h1v1h-1zM14,11h1v1h-1zM17,11h1v1h-1zM18,11h1v1h-1zM20,11h1v1h-1zM22,11h1v1h-1zM24,11h1v1h-1zM25,11h1v1h-1zM27,11h1v1h-1zM28,11h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM7,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM11,12h1v1h-1zM14,12h1v1h-1zM16,12h1v1h-1zM19,12h1v1h-1zM20,12h1v1h-1zM21,12h1v1h-1zM31,12h1v1h-1zM32,12h1v1h-1zM36,12h1v1h-1zM4,13h1v1h-1zM6,13h1v1h-1zM8,13h1v1h-1zM9,13h1v1h-1zM11,13h1v1h-1zM12,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM25,13h1v1h-1zM27,13h1v1h-1zM30,13h1v1h-1zM31,13h1v1h-1zM33,13h1v1h-1zM34,13h1v1h-1zM36,13h1v1h-1zM4,14h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM11,14h1v1h-1zM13,14h1v1h-1zM14,14h1v1h-1zM15,14h1v1h-1zM16,14h1v1h-1zM18,14h1v1h-1zM19,14h1v1h-1zM21,14h1v1h-1zM24,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM30,14h1v1h-1zM32,14h1v1h-1zM34,14h1v1h-1zM35,14h1v1h-1zM4,15h1v1h-1zM6,15h1v1h-1zM7,15h1v1h-1zM9,15h1v1h-1zM11,15h1v1h-1zM14,15h1v1h-1zM21,15h1v1h-1zM22,15h1v1h-1zM24,15h1v1h-1zM25,15h1v1h-1zM28,15h1v1h-1zM30,15h1v1h-1zM32,15h1v1h-1zM33,15h1v1h-1zM34,15h1v1h-1zM35,15h1v1h-1zM36,15h1v1h-1zM4,16h1v1h-1zM5,16h1v1h-1zM6,16h1v1h-1zM9,16h1v1h-1zM10,16h1v1h-1zM11,16h1v1h-1zM13,16h1v1h-1zM15,16h1v1h-1zM16,16h1v1h-1zM17,16h1v1h-1zM18,16h1v1h-1zM20,16h1v1h-1zM24,16h1v1h-1zM27,16h1v1h-1zM28,16h1v1h-1zM29,16h1v1h-1zM31,16h1v1h-1zM32,16h1v1h-1zM33,16h1v1h-1zM35,16h1v1h-1zM36,16h1v1h-1zM4,17h1v1h-1zM5,17h1v1h-1zM6,17h1v1h-1zM8,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM17,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM27,17h1v1h-1zM30,17h1v1h-1zM33,17h1v1h-1zM35,17h1v1h-1zM36,17h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM9,18h1v1h-1zM10,18h1v1h-1zM11,18h1v1h-1zM12,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM18,18h1v1h-1zM22,18h1v1h-1zM24,18h1v1h-1zM26,18h1v1h-1zM29,18h1v1h-1zM30,18h1v1h-1zM31,18h1v1h-1zM34,18h1v1h-1zM35,18h1v1h-1zM4,19h1v1h-1zM6,19h1v1h-1zM7,19h1v1h-1zM9,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM16,19h1v1h-1zM17,19h1v1h-1zM19,19h1v1h-1zM20,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM25,19h1v1h-1zM27,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM33,19h1v1h-1zM34,19h1v1h-1zM5,20h1v1h-1zM10,20h1v1h-1zM11,20h1v1h-1zM15,20h1v1h-1zM17,20h1v1h-1zM18,20h1v1h-1zM19,20h1v1h-1zM24,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM32,20h1v1h-1zM36,20h1v1h-1zM4,21h1v1h-1zM7,21h1v1h-1zM12,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM23,21h1v1h-1zM24,21h1v1h-1zM27,21h1v1h-1zM30,21h1v1h-1zM31,21h1v1h-1zM33,21h1v1h-1zM34,21h1v1h-1zM36,21h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM7,22h1v1h-1zM10,22h1v1h-1zM14,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM21,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM29,22h1v1h-1zM31,22h1v1h-1zM32,22h1v1h-1zM34,22h1v1h-1zM4,23h1v1h-1zM6,23h1v1h-1zM12,23h1v1h-1zM13,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM22,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM29,23h1v1h-1zM31,23h1v1h-1zM32,23h1v1h-1zM33,23h1v1h-1zM34,23h1v1h-1zM35,23h1v1h-1zM36,23h1v1h-1zM5,24h1v1h-1zM8,24h1v1h-1zM9,24h1v1h-1zM10,24h1v1h-1zM12,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM16,24h1v1h-1zM17,24h1v1h-1zM19,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1zM24,24h1v1h-1zM26,24h1v1h-1zM28,24h1v1h-1zM29,24h1v1h-1zM32,24h1v1h-1zM33,24h1v1h-1zM35,24h1v1h-1zM36,24h1v1h-1zM4,25h1v1h-1zM6,25h1v1h-1zM7,25h1v1h-1zM13,25h1v1h-1zM15,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM21,25h1v1h-1zM22,25h1v1h-1zM23,25h1v1h-1zM24,25h1v1h-1zM25,25h1v1h-1zM27,25h1v1h-1zM29,25h1v1h-1zM30,25h1v1h-1zM36,25h1v1h-1zM4,26h1v1h-1zM9,26h1v1h-1zM10,26h1v1h-1zM18,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM29,26h1v1h-1zM31,26h1v1h-1zM33,26h1v1h-1zM34,26h1v1h-1zM35,26h1v1h-1zM4,27h1v1h-1zM6,27h1v1h-1zM9,27h1v1h-1zM11,27h1v1h-1zM14,27h1v1h-1zM17,27h1v1h-1zM19,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM26,27h1v1h-1zM29,27h1v1h-1zM30,27h1v1h-1zM31,27h1v1h-1zM32,27h1v1h-1zM33,27h1v1h-1zM34,27h1v1h-1zM35,27h1v1h-1zM4,28h1v1h-1zM6,28h1v1h-1zM7,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM14,28h1v1h-1zM15,28h1v1h-1zM18,28h1v1h-1zM20,28h1v1h-1zM22,28h1v1h-1zM26,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM30,28h1v1h-1zM31,28h1v1h-1zM32,28h1v1h-1zM35,28h1v1h-1zM36,28h1v1h-1zM12,29h1v1h-1zM13,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM16,29h1v1h-1zM17,29h1v1h-1zM19,29h1v1h-1zM21,29h1v1h-1zM23,29h1v1h-1zM24,29h1v1h-1zM27,29h1v1h-1zM28,29h1v1h-1zM32,29h1v1h-1zM34,29h1v1h-1zM36,29h1v1h-1zM4,30h1v1h-1zM5,30h1v1h-1zM6,30h1v1h-1zM7,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM15,30h1v1h-1zM17,30h1v1h-1zM19,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM27,30h1v1h-1zM28,30h1v1h-1zM30,30h1v1h-1zM32,30h1v1h-1zM34,30h1v1h-1zM35,30h1v1h-1zM4,31h1v1h-1zM10,31h1v1h-1zM12,31h1v1h-1zM14,31h1v1h-1zM15,31h1v1h-1zM18,31h1v1h-1zM20,31h1v1h-1zM22,31h1v1h-1zM24,31h1v1h-1zM25,31h1v1h-1zM26,31h1v1h-1zM27,31h1v1h-1zM28,31h1v1h-1zM32,31h1v1h-1zM33,31h1v1h-1zM34,31h1v1h-1zM35,31h1v1h-1zM4,32h1v1h-1zM6,32h1v1h-1zM7,32h1v1h-1zM8,32h1v1h-1zM10,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM15,32h1v1h-1zM17,32h1v1h-1zM18,32h1v1h-1zM19,32h1v1h-1zM20,32h1v1h-1zM21,32h1v1h-1zM24,32h1v1h-1zM26,32h1v1h-1zM28,32h1v1h-1zM29,32h1v1h-1zM30,32h1v1h-1zM31,32h1v1h-1zM32,32h1v1h-1zM33,32h1v1h-1zM36,32h1v1h-1zM4,33h1v1h-1zM6,33h1v1h-1zM7,33h1v1h-1zM8,33h1v1h-1zM10,33h1v1h-1zM12,33h1v1h-1zM13,33h1v1h-1zM14,33h1v1h-1zM16,33h1v1h-1zM17,33h1v1h-1zM18,33h1v1h-1zM19,33h1v1h-1zM20,33h1v1h-1zM23,33h1v1h-1zM24,33h1v1h-1zM29,33h1v1h-1zM32,33h1v1h-1zM34,33h1v1h-1zM36,33h1v1h-1zM4,34h1v1h-1zM6,34h1v1h-1zM7,34h1v1h-1zM8,34h1v1h-1zM10,34h1v1h-1zM12,34h1v1h-1zM17,34h1v1h-1zM19,34h1v1h-1zM24,34h1v1h-1zM25,34h1v1h-1zM28,34h1v1h-1zM29,34h1v1h-1zM30,34h1v1h-1zM31,34h1v1h-1zM33,34h1v1h-1zM4,35h1v1h-1zM10,35h1v1h-1zM12,35h1v1h-1zM13,35h1v1h-1zM15,35h1v1h-1zM17,35h1v1h-1zM19,35h1v1h-1zM20,35h1v1h-1zM24,35h1v1h-1zM25,35h1v1h-1zM26,35h1v1h-1zM27,35h1v1h-1zM32,35h1v1h-1zM33,35h1v1h-1zM34,35h1v1h-1zM4,36h1v1h-1zM5,36h1v1h-1zM6,36h1v1h-1zM7,36h1v1h-1zM8,36h1v1h-1zM9,36h1v1h-1zM10,36h1v1h-1zM13,36h1v1h-1zM14,36h1v1h-1zM18,36h1v1h-1zM19,36h1v1h-1zM24,36h1v1h-1zM26,36h1v1h-1zM27,36h1v1h-1zM28,36h1v1h-1zM29,36h1v1h-1zM30,36h1v1h-1zM31,36h1v1h-1zM35,36h1v1h-1z"/></svg>
+            </div>
+            <div class="poster-steps-col">
+              <h3>📱 Scan & Wandel Mee!</h3>
+              <ol class="poster-steps-list">
+                <li><strong>Open de camera</strong> van je smartphone.</li>
+                <li><strong>Richt op de QR-code</strong> hiernaast en tik op de gele link.</li>
+                <li><strong>Kies je dorp</strong> en loop langs de 5 lichtjes!</li>
+              </ol>
+              <div class="poster-voice-badge">
+                🎧 Met de warme vertelstem van <strong>Rob Bakker</strong> <em>(Landgoed Rijckholt)</em>
+              </div>
+            </div>
+          </div>
+
+          <!-- Startlocaties per Dorp -->
+          <div class="poster-dorpen-box">
+            <div class="poster-dorpen-title">📍 Startpunten bij de dorpskerken:</div>
+            <div class="poster-dorpen-grid">
+              <div class="poster-dorp-entry">⛪ <strong>Kamperland:</strong> Kerk De Ark (Veerweg 100)</div>
+              <div class="poster-dorp-entry">⛪ <strong>Wissenkerke:</strong> Kerk (Voorstraat 20)</div>
+              <div class="poster-dorp-entry">⛪ <strong>Colijnsplaat:</strong> Kerk (Havelaarstraat 30)</div>
+              <div class="poster-dorp-entry">⛪ <strong>Kortgene:</strong> Nicolaaskerk (Kerkgang 1)</div>
+            </div>
+          </div>
+
+          <!-- Praktische Tips -->
+          <div class="poster-tips-row">
+            <div class="poster-tip-badge">
+              <strong>🔋 Smartphone mee</strong>
+              Met camera & internet
+            </div>
+            <div class="poster-tip-badge">
+              <strong>🔦 Lampionnetje mee</strong>
+              Gezellig in het donker!
+            </div>
+            <div class="poster-tip-badge">
+              <strong>⏱️ Ca. 45 - 60 min</strong>
+              Ontspannen gezinswandeling
+            </div>
+            <div class="poster-tip-badge">
+              <strong>🆓 Gratis toegang</strong>
+              Vrije start wanneer je wilt
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <footer class="poster-footer-pad">
+            Een samenwerking van de kerkgemeenschap op Noord-Beveland, de basisscholen en de ezels van de Voedseldijk.<br>
+            <strong>Website: gruist.github.io/lichtjestocht-kerst</strong>
+          </footer>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function switchMode(mode) {
+      const beamerView = document.getElementById('beamerView');
+      const posterView = document.getElementById('posterView');
+      const tabBeamer = document.getElementById('tabBeamer');
+      const tabPoster = document.getElementById('tabPoster');
+
+      if (mode === 'beamer') {
+        beamerView.style.display = 'flex';
+        posterView.style.display = 'none';
+        tabBeamer.classList.add('active');
+        tabPoster.classList.remove('active');
+      } else {
+        beamerView.style.display = 'none';
+        posterView.style.display = 'block';
+        tabBeamer.classList.remove('active');
+        tabPoster.classList.add('active');
+      }
+    }
+
+    function toggleFullScreen() {
+      switchMode('beamer');
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log("Kon fullscreen niet activeren:", err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    function printPoster() {
+      switchMode('poster');
+      setTimeout(() => {
+        window.print();
+      }, 150);
+    }
+
+    // Sneltoetsen: F voor Fullscreen, P voor Print, B/1 voor Beamer, O/2 voor Poster
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      const key = e.key.toLowerCase();
+      if (key === 'f') {
+        e.preventDefault();
+        toggleFullScreen();
+      } else if (key === 'p') {
+        e.preventDefault();
+        printPoster();
+      } else if (key === 'b' || key === '1') {
+        e.preventDefault();
+        switchMode('beamer');
+      } else if (key === 'o' || key === '2') {
+        e.preventDefault();
+        switchMode('poster');
+      }
+    });
+  </script>
+</body>
+</html>
